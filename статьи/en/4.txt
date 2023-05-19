@@ -1,0 +1,540 @@
+See discussions, stats, and author profiles for this publication at: https://www.researchgate.net/publication/353166282
+
+
+
+Comparative Analysis of Use States of Mobile Application Development
+Methods
+
+Article · May 2021
+DOI: 10.35629/5252-030511181130
+
+
+
+
+CITATIONS                                                                                              READS
+
+0                                                                                                      354
+
+
+1 author:
+
+            Hakan Ünal
+            Istanbul Aydin University
+            1 PUBLICATION 0 CITATIONS
+
+               SEE PROFILE
+
+
+
+
+ All content following this page was uploaded by Hakan Ünal on 11 July 2021.
+
+ The user has requested enhancement of the downloaded file.
+                 International Journal of Advances in Engineering and Management (IJAEM)
+                 Volume 3, Issue 5 May 2021, pp: 1118-1130 www.ijaem.net    ISSN: 2395-5252
+
+
+
+         Comparative Analysis of Use States of Mobile
+             Application Development Methods
+                                                        Hakan Ünal
+Master Thesis Student, , ISTANBUL AYDIN University Department of Computer Engineering,Florya, Istanbul,
+                                               Turkey
+
+---------------------------------------------------------------------------------------------------------------------------------------
+Submitted: 05-05-2021                                  Revised: 18-05-2021                                  Accepted: 22-05-2021
+---------------------------------------------------------------------------------------------------------------------------------------
+
+ABSTRACT: Mobile application development                                Html, CSS for the Application Development
+methods are divided into two as Native Application                      method.
+Development and Cross Platform Application
+Development.      Native     platform    application                            II. MOBILE APPLICATION
+development environment for Android has Android                                DEVELOPMENT ENVIRONMENTS
+Studio, and native platform application development                     2.1 Native Platform Application Development
+environment for iOS has Xcode compilers. Cross                          Environment for Android
+application development environments for Android                                  As an Android application development
+and iOS include environments such as PhoneGap,                          tool, Android SDK (Software Development Kit) was
+React Native, Angular, Ionic and Flutter. In this                       installed on the Eclipse compiler and application
+study, Native and Cross Platform Application                            developments were made, and Android Studio was
+Development methods were used to adding a simple                        started to be used after the Android Studio compiler
+two numbers, as a more complex application, todo                        was released in May 2013 [4]. This compiler is
+list application working with Firebase Real Time                        based on Intellij IDEA and designed for Android
+Database was made and comparative analysis of                           application development and it has ready-made
+mobile application development methods was made                         systems for installing Android SDK. These systems
+by giving application scenarios.                                        can update and clean up the old SDK when the new
+KEYWORDS:Mobile Application Development,                                SDK is released. In its first release, only Java
+Android Studio,Xcode, Native Platform Application                       programming language was used as the
+Development,Cross         Platform       Application                    programming language, and then the Kotlin
+Development.                                                            programming language was added [2]. With the
+                                                                        AVD Manager (Android Virtual Device Manager)
+               I. INTRODUCTION                                          in Android Studio, applications can be tested with a
+         Various methods have been developed on                         phone or tablet running in a virtual environment.
+Mobile Application Development. The number of                           With the XML Editor in Android Studio, controls
+these methods is increasing gradually. In addition to                   such as textview, button can be added to the
+methods, new programming languages, new design                          application with a drag and drop logic, and events
+tools and new compilers are emerging. Mobile                            such as clicks and scrolls can be created with these
+application development methods are divided into                        controls. With the Profiler in Android Studio,
+Native Application Development and Cross                                problems related to the performance of the
+Platform Application Development.          Different                    application on the phone can be seen.
+programming languages are used depending on the
+method chosen. There are Native Platform for                            2.1 Native Platform Application Development
+Android operating system, Java and Kotlin                               Environment for iOS
+programming       languages     for      Application                             Native platform application development
+Development method [1-2]. Native Platform for iOS                       for iOS is carried out using the Xcode compiler.
+operating system, Objective-C and Swift                                 Objective-C is used as the programming language
+programming       languages     for      Application                    and Swift programming language has also been
+Development method [3]. There are programming                           added [3]. With the iOS Simulator included in
+languages such as Cross Platform for Android and                        Xcode, applications can be tested with iPhone or
+iOS operating systems, JavaScript, TypeScript, C#,                      iPad running in a virtual environment. With the
+                                                                        Interface Builder in Xcode, controls such as labels
+DOI: 10.35629/5252-030511181130 Impact Factor value 7.429 | ISO 9001: 2008 Certified Journal Page 1118
+               International Journal of Advances in Engineering and Management (IJAEM)
+               Volume 3, Issue 5 May 2021, pp: 1118-1130 www.ijaem.net    ISSN: 2395-5252
+
+
+and buttons can be added to the application with a         mobile     applications    with     the    JavaScript
+drag and drop logic, and events such as clicks and         programming language developed by Facebook and
+scrolls can be created with these controls. With           converted to open source as of March 2015 [7].
+Instruments in Xcode, problems related to the              Facebook’s Facebook Groups and Facebook Ads
+performance of the application on the phone can be         manager applications are developed with React
+seen.                                                      Native [7]. It is a framework developed by using
+                                                           client-side JavaScript and MV* (Model View
+2.2 Cross-Platform Application Development                 Whatever) architectural design pattern developed by
+Environment for Android and iOS                            Angular Google [8]. Ionic AngularJS is a
+         PhoneGap is among the first frameworks to         framework that allows application with JavaScript
+come out among cross-platform applications.                programming language using MVC (Model View
+However, PhoneGap has been deprecated [5]. It is           Controller) architecture.Flutter is a framework that
+the framework that allows application development          enables cross-platform mobile applications using
+using Xamarin C# programming language [6]. React           Dart programming language developed by Google
+Native is a framework that enables cross-platform          [9].
+
+      Table 1: Native Platform Application Development vs Cross Platform Application Development [8]
+                              Native                     Cross
+                              Animations, slides are It is slower than native
+                              faster.                    platform applications.
+                              The          development The           development
+                              process is slow.           process is faster.
+                              Resource cost is high.     The resource cost is
+                                                         minimal.
+                              It is difficult to update. It is easy to update.
+                              Each one requires a One                development
+                              different development environment                 is
+                              environment.               sufficient.
+
+2.3 About Cross             Platform       Application     immediately. Because at the same time, compilers
+Development                                                are updated.
+          The reason why cross-platform application                 In this study, using mobile application
+development methods are needed is understood               development methods, a simple mobile application
+from the features such as being fast and low in cost       showing the sum of two numbers and a more
+as indicated in Table 1 [8]. In order to develop           complex application to do list application were
+native platform applications, it is necessary to learn     developed, and mobile application development
+the programming language and compiler of that              methods were examined and comparative analysis
+platform. It is preferred as it is sufficient to learn a   was made. Data in todo list application is stored on
+language and a compiler for cross application              the Firebase Real Time Database. Firebase Real-
+development. The working logic of cross                    Time Database offers dynamic, extensible functions
+applications usually runs the application in a Web         and real-time data insertion, update and deletion
+Browser (WebView) [10]. This Web Browser works             [11]. Login and sign-up screens in the todo list
+in a Chrome-based structure on Android and a               application are made using Firebase Authentication.
+Safari-based structure on iOS. Since the application       Firebase Authentication provides secure login by
+is a Web Browser, changes can be made within the           providing multiple authentication methods such as
+application without installing a new version of the        e-mail / password, social login with major providers
+application, but it is necessary to install a new          (Google, Facebook, Twitter…) and also provides
+version for changes such as application permissions.       anonymous login [11].
+Also, when new versions of Android and iOS are
+released, Cross platforms may not adapt                            III. MOBILE APPLICATION
+immediately. In order to develop the application                     DEVELOPMENT METHODS
+related to the native platform, it is necessary to         3.1 Native Platform Mobile Application
+know the programming language and the compiler             Development Method with Android Studio
+of that platform. When new versions of Android and                 Figure 1 shows the design and code side of
+iOS are released, native platforms adapt                   the twonumber addition mobile application on
+                                                           Android Studio. Designs are kept in files with .xml
+DOI: 10.35629/5252-030511181130 Impact Factor value 7.429 | ISO 9001: 2008 Certified Journal Page 1119
+              International Journal of Advances in Engineering and Management (IJAEM)
+              Volume 3, Issue 5 May 2021, pp: 1118-1130 www.ijaem.net    ISSN: 2395-5252
+
+
+extension. Codes are kept in files with .java                      Figure 3 shows the design and code side of
+extension.It is necessary to name the components in      the mobile application on Xcode. Designs are kept
+thedesignsasfirstNumberEditText,                         in files with .storyboard extension. Codes are kept in
+secondNumberEditText and match the code side             files with .swift extension. There is no need to name
+with these names. After this matching, actions such      the components in the designs such as
+as clicking, sliding and holding can be performed        firstNumberTextField, secondNumberTextField and
+with these components. Application permissions are       these naming and matching are done on the code
+written into the AndroidManifest.xml file.Figure 2       side. After this matching, actions such as clicking,
+shows the libraries used and practical screen usage      sliding and holding can be performed with these
+in the code section of the todo list mobile              components. Application permissions are written in
+application in Android Studio. Unlike adding two         the Info.plist file. Figure 4 shows the code side of
+numbers, it seems that more lines of code and more       the todo list mobile application on Xcode, the
+libraries need to be added to the project. Firebase      libraries used and the screenshot of the applicaiton.
+has a direct library for Android Studio and is shown     Unlike adding two numbers, it seems that more lines
+in Figure 2.                                             of code and more libraries need to be added to the
+                                                         project. Firebase has a direct library for Xcode and
+3.2 Native Platform Mobile             Application       is shown in Figure 4.
+Development Method with Xcode
+
+
+
+
+                   Fig. 1 Screenshot of Android Studio Two Number Addition Application
+
+
+
+
+                             Fig. 2 Screenshot of Android Studio To Do List App
+
+
+DOI: 10.35629/5252-030511181130 Impact Factor value 7.429 | ISO 9001: 2008 Certified Journal Page 1120
+            International Journal of Advances in Engineering and Management (IJAEM)
+            Volume 3, Issue 5 May 2021, pp: 1118-1130 www.ijaem.net    ISSN: 2395-5252
+
+
+
+
+                      Fig. 3Screenshot of Xcode Two Number Addition Application
+
+
+
+
+                                Fig. 4Screenshot of XcodeTo Do List App
+
+
+
+
+DOI: 10.35629/5252-030511181130 Impact Factor value 7.429 | ISO 9001: 2008 Certified Journal Page 1121
+             International Journal of Advances in Engineering and Management (IJAEM)
+             Volume 3, Issue 5 May 2021, pp: 1118-1130 www.ijaem.net    ISSN: 2395-5252
+
+
+3.3 Native Platform Mobile Application                 in      the     AndroidManifest.xml       file     in
+Development Method with Xamarin                        Xamarin.Android, in the Info.plist file in
+          Figure 5 shows the design codes and code     Xamarin.iOS. Figure 6 shows the code side of the
+side of the mobile application on Xamarin. Designs     todo list mobile application on Xamarin, the
+are kept in files with .xaml extension. Codes are      libraries used and the screenshot of the application.
+kept in files with extension .xaml.cs. It is not       Unlike adding two numbers, it seems that more
+necessary to name the components in the designs as     lines of code and more libraries need to be added to
+firstNumberEditor, secondNumberEditor and to           the project. Firebase does not have a direct library
+match the code side with these names and can be        for Xamarin and the FirebaseDatabase.net library is
+used directly. Application permissions are written     used and is shown in Figure 6.
+
+
+
+
+DOI: 10.35629/5252-030511181130 Impact Factor value 7.429 | ISO 9001: 2008 Certified Journal Page 1122
+              International Journal of Advances in Engineering and Management (IJAEM)
+              Volume 3, Issue 5 May 2021, pp: 1118-1130 www.ijaem.net    ISSN: 2395-5252
+
+
+3.4 Native Platform Mobile Application                 AndroidManifest.xml file for Android and in the
+Development Method with React Native                   Info.plist file for iOS. Figure 8 shows the code side
+         Figure 7 shows the code side of the mobile    of the todo list mobile application on React Native,
+application’s design codes on React Native.            the libraries used and the screenshot of the
+Designs are made with CSS programming                  application. Unlike the two number addition
+language. The codes are written in the JavaScript      applications, it seems that more lines of code and
+language. CSS codes and JavaScript codes are kept      more libraries need to be added to the project.
+in the same file and must be associated with each      Firebase does not have a direct library for React
+other. The transfer of the codes written to Android    Native and the React Native Firebase library is
+Emulator or phone is done with Node.js.                used.
+Application permissions are written in the
+
+
+
+
+                                                       filled .apk file for Android can be uploaded to be
+3.5 Native Platform Mobile Application                 published in the Google Play Store. It can be sent
+Development Method with Angular                        to publish in the App Store via the project file
+          Figure 9 shows the design codes and code     created for iOS. Application permissions are
+side of the mobile application on Angular. Designs     written into the AndroidManifest.xml file for
+are made with HTML programming language. The           Android, into the Info.plist file for iOS. Figure 10
+codes are written in TypeScript language and are       shows the code side of the todo list mobile
+kept in files with .ts extension and must be           application on Angular, the libraries used and the
+associated with each other. In Figure 9, the image     screenshot of the application. Unlike adding two
+of the mobile application is shown on Chrome and       numbers, it seems that more lines of code and more
+it is necessary to export it as an Android Studio or   libraries need to be added to the project. Firebase
+Xcode project in order to be shown on the phone.       does not have a direct library for Angular and the
+Apk file can be created directly for Android and       AngularFire library was used.
+.ipa file cannot be created directly for iOS. The
+
+
+
+
+DOI: 10.35629/5252-030511181130 Impact Factor value 7.429 | ISO 9001: 2008 Certified Journal Page 1123
+              International Journal of Advances in Engineering and Management (IJAEM)
+              Volume 3, Issue 5 May 2021, pp: 1118-1130 www.ijaem.net    ISSN: 2395-5252
+
+
+
+
+3.6 Native Platform Mobile Application                 created directly for iOS. The .apk file created for
+Development Method with Ionic                          Android can be uploaded to be published in the
+          Figure 11 shows the design codes and         Google Play Store. It can be sent to publish in the
+code side of the mobile application on Ionic. Ionic    App Store via the project file created for iOS.
+can be made with Angular, React, and Vue, in this      Application permissions are written into the
+example it is made with Angular. Designs are made      AndroidManifest.xml file for Android, into the
+with HTML programming language. The codes are          Info.plist file for iOS. Figure 12 shows the code
+written in TypeScript language and are kept in files   side of the todo list mobile application on Ionic, the
+with .ts extension and must be associated with each    libraries used and the screenshot of the application.
+other. In Figure 11, the image of the mobile           Unlike adding two numbers, it seems that more
+application is shown on Chrome and it is necessary     lines of code and more libraries need to be added to
+to export it as an Android Studio or Xcode project     the project. Firebase does not have a direct library
+in order to be shown on the phone.Apk file can be      for Ionic and the AngularFire library was used.
+created directly for Android and .ipa file cannot be
+
+
+
+
+DOI: 10.35629/5252-030511181130 Impact Factor value 7.429 | ISO 9001: 2008 Certified Journal Page 1124
+              International Journal of Advances in Engineering and Management (IJAEM)
+              Volume 3, Issue 5 May 2021, pp: 1118-1130 www.ijaem.net    ISSN: 2395-5252
+
+
+
+
+3.7 Native Platform Mobile Application                 directly for iOS. Application permissions are
+Development Method with Flutter                        written into the AndroidManifest.xml file for
+          Figure 13 shows the design codes and         Android into the Info.plist file for iOS. Figure 14
+code side of the mobile application on Flutter.        shows the code side of the todo list mobile
+Designs and codes are made in Dart Programming         application on Flutter, the libraries used and the
+language and must be associated with control codes     screenshot of the application. Unlike adding two
+such as TextEditingController to control               numbers, it seems that more lines of code and more
+components. Android Emulators can be used to test      libraries need to be added to the project. Firebase
+the mobile application. Apk file can be created        does not have a direct library for Android Studio
+directly for Android and .ipa file cannot be created   and the FlutterFire library has been used.
+
+
+
+
+DOI: 10.35629/5252-030511181130 Impact Factor value 7.429 | ISO 9001: 2008 Certified Journal Page 1125
+            International Journal of Advances in Engineering and Management (IJAEM)
+            Volume 3, Issue 5 May 2021, pp: 1118-1130 www.ijaem.net    ISSN: 2395-5252
+
+
+
+
+DOI: 10.35629/5252-030511181130 Impact Factor value 7.429 | ISO 9001: 2008 Certified Journal Page 1126
+            International Journal of Advances in Engineering and Management (IJAEM)
+            Volume 3, Issue 5 May 2021, pp: 1118-1130 www.ijaem.net    ISSN: 2395-5252
+
+
+
+
+            IV. COMPARISON                             seen in Table 2, Native Platform Application
+       Native Platform Application Development         development methods provide a better usage than
+Methods and Cross Platform Application                 Cross Platform Application development methods.
+Development methods are compared in Table 2. As
+
+ Table 2: Comparison of Native Platform Application Development Methodsand Cross Platform Application
+                                          Development Methods
+                            Native     Application Cross       Application
+                            Development              Development
+                            Methods                  Methods
+                            There        is      no There          is      a
+                            compatibility problem compatibility problem
+                            with new and old with the new and old
+                            versions.                versions.
+                            The        development The         development
+                            process     is    slow. process     is    faster.
+                            Because it is necessary Because it is sufficient
+                            to develop separate to develop a single
+                            mobile applications for mobile application for
+DOI: 10.35629/5252-030511181130 Impact Factor value 7.429 | ISO 9001: 2008 Certified Journal Page 1127
+             International Journal of Advances in Engineering and Management (IJAEM)
+             Volume 3, Issue 5 May 2021, pp: 1118-1130 www.ijaem.net    ISSN: 2395-5252
+
+
+                              both Android and iOS      both Android and iOS
+                              platforms.                platforms.
+                              Its performance is        Its performance is
+                              faster. Because it uses   slow. Because it cannot
+                              pure UI designs for       use pure UI designs for
+                              Android and iOS.          Android and iOS.
+
+4.1 Comparison of Xamarin and Native                           better to use native mobile application
+Platform Mobile Application Development                        development methods [14].
+Methods
+Advantages of mobile application development                  If it is necessary to createa special application
+with Xamarin:                                                  that requires the use of code specific to the
+ Applications can be developed with C# and                    platform (Android or iOS), native mobile
+    Visual Studio [12].                                        application development methods should be
+ Applications developed with Xamarin can                      used [14-15].
+    perform at the same level with native                     If the application needs to support all operating
+    applications [13].                                         system updates as soon as they are released,
+ Allows full hardware compatibility using                     native mobile application development
+    plugins and specific APIs for a seamless user              methods must be used [14-15].
+    experience [13].
+ Xamarin comes in a single package complete               4.3 Comparison of Angular and Native Platform
+    with all development toolkits, including its           Mobile Application Development Methods
+    own IDE [13].                                          Advantages of mobile application development
+ Supports TVs, wearable devices and IoT [13].             with Angular:
+                                                            It enables the developed application designs to
+Disadvantages of mobile application development                appear similarly on Android and iOS platforms
+    with Xamarin:                                              [8].
+ The application developed with Xamarin takes              It reduces the cost of the process as it can be
+    up more space than the native application [12-             printed on both Android and iOS platforms at
+    13].                                                       once [8].
+ When a new version of the mobile operating                Since the application can be developed by
+    system is released, Xamarin may need to be                 learning a single programming language
+    updated according to the new version [12].                 instead of learning more than one
+ Xamarin is a free open source platform for                   programming language, the learning process is
+    individual developers but can be expensive for             shorter [8].
+    enterprise use [13].
+ Xamarin can still be susceptible to stability,           Disadvantages of mobile application development
+    bugs and crashes [13].                                 with Angular:
+                                                            While applications are translated into the
+4.2 Comparison of React Native and Native                      language of the machine on which they are
+Platform Mobile Application Development                        running in native platform application
+Methods                                                        development methods, Angular cross-platform
+Advantages of mobile application development                   mobile application development method works
+with React Native:                                             by interpreting the application on the browser
+ The application looks and behaves the same on                so the performance of native platform
+    Android and iOS platforms [14-15].                         applications is higher [8].
+ It saves time since it can be developed for both
+    Android and iOS [14-15].                               4.4 Comparison of Ionic and Native Platform
+ It can develop an application in a very short            Mobile Application Development Methods
+    time and with minimum cost [14].                       Advantages of mobile application development
+                                                           with Ionic:
+Disadvantages of mobile application development             It is open source [16].
+with React Native:                                          It has ready-made add-ons that can be used to
+ If it is necessary to create an application for              develop applications [16].
+    only one platform (Android or iOS), it may be           The same code can be run on both Android
+
+DOI: 10.35629/5252-030511181130 Impact Factor value 7.429 | ISO 9001: 2008 Certified Journal Page 1128
+              International Journal of Advances in Engineering and Management (IJAEM)
+              Volume 3, Issue 5 May 2021, pp: 1118-1130 www.ijaem.net    ISSN: 2395-5252
+
+
+    and iOS platforms [16-17].                           because of this, there may be compatibility
+                                                         problems in applications made with the cross-
+Disadvantages of mobile application development          platform application development method. On the
+    with Ionic:                                          other hand, when a change is requested in the
+ The performance of applications developed              mobile application, changes are made for both
+    with Ionic is less than the performance of           Android and iOS at once. In addition, the mobile
+    applications developed natively [16-17].             application made in some cross-platform
+ It takes more time to develop new plugins              application development methods cannot be run
+    separately, as it does not include plugins for       directly on the Android Emulator. However,
+    every requirement [16].                              Google solved these problems with Flutter and
+                                                         created a new framework.
+4.5 Comparison of Flutter and Native Platform
+Mobile Application Development Methods                                  REFERENCES
+Advantages of mobile application development             [1].  Sıcak, M. A., 2016, Android Programming
+with Flutter:                                                  and      Application     Guide,    LEVEL,
+ It has a very rich documentation [18].                       Turkey/Kocaeli
+ MaterialApp library for Android designs there          [2]. Sıcak, M. A., 2017, Kotlin Turkey’s First
+    is a Cupertino library for iOS designs [18-19].            and     Only    Kotlin     Book,   LEVEL,
+ There is a central website (pub.dev) with many               Turkey/Kocaeli
+    libraries that can be used [20].                     [3]. Kızılören, T., 2015, iOS SDK with Swift
+                                                               and Objective-C, Kodlab, Turkey/Istanbul
+Disadvantages of mobile application development          [4]. https://developer.android.com/studio/release
+    with Flutter:                                              s, Date of Access: 11 May 2021, Subject:
+ Applications for tvOS, watchOS, CarPlay or                   Android Studio release notes
+    Android Auto cannot be made with Flutter             [5]. https://helpx.adobe.com/experience-
+    [21].                                                      manager/kb/adobe-phonegap-end-of-
+ The size of applications developed with Flutter              service.html, Date of Access: 11 May 2021,
+    is larger and the size of a Hello World                    Subject: End of service for Adobe PhoneGap
+    application is 4.7 MB in Flutter and 550 KB in       [6]. Petzold C., 2016, Creating Mobile Apps
+    native applications [21].                                  with Xamarin Forms, Microsoft Press A
+                                                               Division of Microsoft Corporation One
+                                                               Microsoft Way Redmond, Washington
+              V. CONCLUSION
+          It is necessary to choose the appropriate            98052-6399, ISBN: 9781-5093-0297-0
+method according to the advantages and                   [7]. Canker, M., 2015, Web and Mobile
+                                                               Application Development with React and
+disadvantages of mobile application development
+methods, programming languages, development                    React Native, Kodlab, Turkey/Istanbul
+                                                         [8]. Canker, M., 2015, Web and Mobile
+environments and Xamarin should be selected if C#
+programming language is desired. While making                  Application Development with Angular,
+                                                               Kodlab, Turkey/Istanbul
+this selection, it is necessary to make a selection by
+evaluating the size of the team that will develop the    [9]. Mainkar P., Giordano S., 2019, Google
+mobile application, the time of development of the             Flutter Mobile Development Quick Start
+                                                               Guide, Packt Publishing Ltd., UK, ISBN:
+mobile application, the operating systems of the
+                                                               978-1-78934-496-7
+computers to be used in mobile application
+development and the programming language to be           [10]. Charland, A., Leroux, B., 2011, Mobile
+used. It is necessary to learn the programming                 Application Development: Web vs. Native,
+                                                               Communications of the ACM, 54, 5, 49-53.
+language and compiler of the platform in native
+                                                               DOI:10.1145/1941487.1941504
+platform application development methods.
+However, since the applications run on their own         [11]. Yahiaoui H., 2017, Firebase Cookbook,
+                                                               Packt Publishing, Birmingham
+platform, there is no compatibility problem. In
+                                                         [12]. Jepbarov D., 2017, Subject: Xamarin React
+Cross Platform application development methods,
+both Android and iOS applications can be made on               Native         Ionic,Access        Address:
+a single platform. However, in some cross-platform             https://medium.com/ios-development-
+application       development       methods      since         turkey/xamarin-react-native-ionic-
+                                                               dbdf18eb9487, Date of Access: 11 May
+applications are written on another platform, this
+platform needs to be updated according to the                  2021
+newly released Android and iOS versions and
+DOI: 10.35629/5252-030511181130 Impact Factor value 7.429 | ISO 9001: 2008 Certified Journal Page 1129
+                          International Journal of Advances in Engineering and Management (IJAEM)
+                          Volume 3, Issue 5 May 2021, pp: 1118-1130 www.ijaem.net    ISSN: 2395-5252
+
+
+            [13]. Surbhi., 2020, Subject: Frameworks for                 Address: https://medium.com/swlh/flutter-
+                  Cross-Platform App Development: Flutter vs             vs-native-for-mobile-development-
+                  Xamarin vs React Native, Access Address:               4f92e4d2203b, Date of Access: 11 May
+                  https://surbhi-technical-                              2021
+                  blogger.medium.com/frameworks-for-cross-
+                  platform-app-development-flutter-vs-
+                  xamarin-vs-react-native-systango-
+                  d82a427c16b9, Date of Access: 11 May
+                  2021
+            [14]. Smartym P., 2019, Subject: React Native vs
+                  iOS/Android Native: what is the best choice
+                  for mobile development today?, Access
+                  Address:https://medium.com/@smartym.pro
+                  /react-native-vs-ios-android-native-what-is-
+                  the-best-choice-for-mobile-development-
+                  today-67cde42fc8bc, Date of Access: 11
+                  May 2021
+            [15]. Trnka D., 2018, Subject: Mobile App
+                  Development: React Native vs Native (iOS,
+                  Android),            Access           Address:
+                  https://medium.com/mop-
+                  developers/mobile-app-development-react-
+                  native-vs-native-ios-android-49c5c168045b,
+                  Date of Access: 11 May 2021
+            [16]. Panchal M., 2016, Subject: Ionic Vs Native
+                  Apps: Revealing An Outstanding Platform
+                  For Your Mobile App, Access Address:
+                  https://www.excellentwebworld.com/ionic-
+                  vs-native-app-development/, Date of Access:
+                  11 May 2021
+            [17]. Delaney J., 2018, Subject: Ionic 4… Should
+                  you Build a Hybrid App?, Access Address:
+                  https://itnext.io/should-you-use-ionic-4-
+                  fa04daebaffd?gi=c32d8f478ed9, Date of
+                  Access: 11 May 2021
+            [18]. Çolak E., 2020, Subject: React Native vs
+                  Flutter!Which?,                         Access
+                  Address:https://medium.com/defactoteknolo
+                  ji/react-native-vs-flutter-hangisi-
+                  d11ad3582050, Date of Access: 11 May
+                  2021
+            [19]. Bellinaso M., 2018, Subject: Flutter: the
+                  good, the bad and the ugly, Access Address:
+                  https://medium.com/asos-techblog/flutter-
+                  vs-react-native-for-ios-android-app-
+                  development-c41b4e038db9,           Date    of
+                  Access: 11 May 2021
+            [20]. Decanini E., 2020, Subject: Flutter vs
+                  Android/iOS – Hybrid vs Native App
+                  Development in 2020, Access Address:
+                  https://www.ericdecanini.com/2020/05/25/fl
+                  utter-vs-android-ios-hybrid-vs-native-app-
+                  development-in-2020/, Date of Access: 11
+                  May 2021
+            [21]. Chang W. S., 2020, Subject: Flutter vs
+                  Native for Mobile Development, Access
+
+            DOI: 10.35629/5252-030511181130 Impact Factor value 7.429 | ISO 9001: 2008 Certified Journal Page 1130
+
+
+
+
+View publication stats
+
