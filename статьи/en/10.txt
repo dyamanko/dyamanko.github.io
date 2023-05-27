@@ -1,0 +1,465 @@
+See discussions, stats, and author profiles for this publication at: https://www.researchgate.net/publication/364277604
+
+
+
+A Systematic Comparison Between Flutter and React Native from Automation
+Testing Perspective
+
+Conference Paper · October 2022
+DOI: 10.1109/ISMSIT56059.2022.9932749
+
+
+
+
+CITATION                                                                                                  READS
+1                                                                                                         423
+
+
+2 authors:
+
+            Husam Abu Zahra                                                                                          Samer Zein
+            Birzeit University                                                                                       Birzeit University
+            1 PUBLICATION 1 CITATION                                                                                 27 PUBLICATIONS 227 CITATIONS
+
+               SEE PROFILE                                                                                                SEE PROFILE
+
+
+
+
+ All content following this page was uploaded by Samer Zein on 09 October 2022.
+
+ The user has requested enhancement of the downloaded file.
+       A SYSTEMATIC COMPARISON BETWEEN
+        FLUTTER AND REACT NATIVE FROM
+        AUTOMATION TESTING PERSPECTIVE
+                                      * Note:   Sub-titles are not captured in Xplore and should not be used
+
+
+                     1st Husam Abu Zahra                                                              2nd Samer Zein
+ Department of Software Engineering and Computer Science Department of Software Engineering and Computer Science
+                     Birzeit University                                      Birzeit University
+                     Birzeit, Palestine                                      Birzeit, Palestine
+                   habuzahra@gmail.com                                       szain@birzeit.edu
+
+
+
+
+   Abstract—In recent years, mobile applications have attempted             comprised development, testing, deployment, and the expense
+to significantly improve our lives. Android and iOS are the two             of running numerous teams.
+most popular mobile platforms, yet they have varied settings                   1
+(OS versions, screens, manufacturers, etc.) as a result creating
+a mobile application might be difficult. In recent years, several              With the introduction of cross-platform frameworks such as
+cross-platform frameworks, such as Flutter and React Native,                Flutter, React Native, and Xamarin by significant tech firms
+have shown to be pioneers in this field. For developers, however,           such as Google, Microsoft, and Facebook, developers and
+choosing cross-platform can be an intimidating task. In this                businesses began creating mobile apps that operate on both
+research, we examine the automated testing capabilities of the              iOS and Android using the same versions of the source code,
+Flutter and React Native frameworks in terms of automation
+testing. We concentrate on automation testing reusability, inte-            this helps the developers and software companies to reduce
+gration, and compatibility. We created a To-Do List mobile app in           and mitigate the work and cost of the development process,
+Flutter and React-Native by using Testproject.io as an automation           statistics in “Fig. 1” show that React Native and Flutter hold
+testing platform. As a result of this research, the experiment              the largest market share in comparison to other frameworks
+demonstrates that React Native outperforms Flutter in terms of              as they are developed and supported by Facebook and Google
+reusability and compatibility, with no significant difference in
+terms of integration.                                                       [2], [3].
+   Index Terms—Cross Platform, Flutter, React Native, Testing,
+Automation Testing                                                                                II. RELATED WORKS
+                                                                               As part of our investigation, we discovered no studies
+                      I. I NTRODUCTION                                      comparing Flutter and React Native in terms of testing, as well
+                                                                            as no studies comparing Flutter and React Native in general,
+   As the need for electronic services rises, mobile applications           therefore, various studies on the cross-platform issues have
+(apps) have a tremendous impact on our lifestyles, habits,                  been found, as well as research on a testing strategy for the
+and many other aspects of our existence, the need for mobile                same app on multiple cross-platforms such as iOS and Android
+applications is no longer a luxury, it has become an essential              and studies on the testing process for mobile apps, several
+part of our daily lives [1]. According to current research,                 studies were identified.
+the mobile sector has grown dramatically in recent years,                      The following criteria are used to choose the papers: 1)
+with estimates estimating that 5 billion people globally own a              Papers written in English 2) Papers released in 2016 and
+mobile device, more than half of which are smartphones.                     after 3) Cross-platform research 4) documents longer than four
+   With the increased demand in this business, firms and man-               pages in all, as a result, 22 articles out of 43 were reviewed for
+ufacturers are scrambling to create devices that target all client          this study, and three groups were identified: 1) Cross-Platform
+groups, including different screen sizes, CPUs, sensors, and a              challenges 2) Cross-Platform applications testing 3) Mobile
+variety of other capabilities, placing pressure on developers to            applications cross platform evaluation.
+create high-quality apps.
+   Companies used to engage different teams to handle the                   A. Cross Platform Challenges
+development of native mobile applications when mobile de-                     Six studies have been reviewed in this section to investigate
+velopment first began, to develop for the iOS and Android                   the cross-platform challenges, accessing the device hardware
+platforms, two or more dedicated teams were necessary, this
+increased the overall cost of the development process, which                  1 978-1-6654-7013-1/22/$31.00    ©2022 IEEE
+                                                                       Reference [7] also experimented the Xamarin and identified
+                                                                    that cross-platform applications are not backward compatible
+                                                                    when the new version of the Mobile SDK is being updated,
+                                                                    and the developers need to modify their Xamarin code once
+                                                                    the Android or the iOS SDK is updated.
+                                                                       Reference [9] conducted a study on two data sets count-
+                                                                    ing 85,908 questions, those questions are posted on Stack
+                                                                    Overflow and Xamarin Forum and downloaded using Stack
+                                                                    Exchange, their findings were matching with what has been
+                                                                    discussed by [8], they conclude that the cross-platform still
+                                                                    has an immature community and the official documentation
+                                                                    of Xamarin still need to be improved.
+                                                                    B. Cross Platform applications Testing
+                                                                       Eight studies have been reviewed to investigate cross plat-
+                                                                    form testing, [10], [11] both of them built a tool to discover
+                 Fig. 1. Cross Platform Comparison                  the limitation and the challenges of the cross platform under
+                                                                    certain circumstances, such as generating test scripts that can
+                                                                    run on iOS and Android, having tools that can perform the test
+and modifying the cross-platform libraries were the results of      on the deployed app, while [12] perform an automated test to
+[4], on the other the sub optimal experience of UI and UX was       measure the UX of the cross-platform apps, [13] developed
+stated by [5], while [6] indicates that battery consumption is      a framework for mobile application automation testing on the
+an issue in cross-platform mobile apps. Reference [7] shed          Android platform only, while [14] introduce the automation
+the light on the backward compatibility issues in the cross-        for testing the accessibility on the mobile applications.
+platform apps, while [4]–[6] agreed that performance is a              Reference [15], [16] surveyed to investigate the state of the
+major issue in cross-platform applications.                         art tools in this area, while [17] used the mutation testing to
+   Reference [4] conducted a case study on the Cross-Platform       discover the remaining mutant over the different platform for
+and did qualitative research to investigate the challenges of       the cross-platform applications.
+the Cross-Platform, they found during their research that              Reference [10] did research using the design science
+the developers sometimes must modify the cross-platform             paradigm described by [18] to discover the testing for the
+libraries to support some features which are not supported          cross-platform, they built a framework called Mobilette for
+by the standard cross-platform itself, on other hand, some of       testing mobile cross-platform applications, the framework was
+the challenges were that the cross-platform frameworks are          supporting only touching elements, setting text and getting
+consuming the device performance, and developers need to            text, they did the test on a simple application that displaying
+rebuild their applications again using native language to avoid     greeting message based on the input text, the test has been
+the performance issue on the device, they found that when           executed over 2 different platform iOS and Android, where
+the nature of the mobile application requires deep access to        each platform has been tested using an emulator and the real
+the hardware of the device, the developers select the native        device, in their conclusion, they mentioned that the tools can
+approach and avoid using the cross-platform, this is due to the     handle only simple UI, and in the future, they can extend it
+simplicity of accessing the device hardware using the native        to handle complex and multi-screens UI.
+language compared to the cross-platform.                               Reference [18] developed a framework called x-PATeSCO
+   Reference [8] has been argued that the Cross-Platform            to generate test scripts for the applications built using different
+provide less UI and UX experience compared to the native            cross-platform, the tool was developed based on Appium and
+platform, their results were built by the decision-makers           the Selenium WebDriver API where the output is Appium
+may not question the truth, and they rely on the state-             script, the framework used to capture the events and parse
+ments that being published as peer-reviewed scientific papers,      the XML based on two combined strategies, Expressions-
+Hansen,Grønli and Ghinea mentioned that breaking this circle        MultiLocator where it depends on the following attributes:
+of misconceptions requires research efforts to test and validate    XPath-attribute values, XPath-Identifiers and XPath-Absolute
+this claim, while [7] identified the challenges of cross-platform   Path, while the ExpressionsInOrder depends on six attributes
+mobile development by the large number of the different             CrossPlatform, ElementType, IdentifyAttributes, AncestorAt-
+devices manufacturers, where each manufactured device has           tribute, AbsolutePath, and AbsoluteIndex, the experiment has
+its different version of the OS and different security rules,       been done over 9 open-source applications built using three
+which make the process for developing applications using the        cross-platform Cordova, React Native, and Xamarine and
+cross mobile platform is not easy when trying to access the         tested over different six configurations, the results show that
+hardware, matching the results which have been discussed by         4 strategies are applicable for all types of tests which are (Ex-
+[4], [5].                                                           pressionsInOrder, AncestorIndex, ExpressionsMul-tiLocator,
+and AbsolutePath ) while (ElementType, AncestorAttributes            platform and running on Android apps.
+IdentifyAttributes, and CrossPlatform) are less applicable.
+   Reference [12] in their study performed an automation             C. Mobile Applications Cross Platform Evaluation
+test to measure the UX performance between the native                   In this category, eight studies have been reviewed to inves-
+app and the cross-platform applications, they developed a            tigate how the cross-platform is evaluated, studies [19], [20]
+simple application in Flutter, React and the Native Android          developed a framework to enable the researchers, developers,
+application, the app is a social media-like app, which is used       and others to evaluate the cross-platform, while [21] conduct
+to post comments and does scroll for the profile timeline, the       a comprehensive comparison between three cross-platform to
+application stores the data on the device and is not connected       help the developers choose one of them, on the other hand,
+to the network, they used detox, Flutter driver and espresso to      [22] evaluate the cross-platform against the native platforms,
+automate the testing process, even [12] were able to measure         [23] conducted research to evaluate the effect of using the
+the UI response, but in their conclusion, they mentioned that        cross platforms on the UX, [20] proposed a framework that
+the used tools were not fully support the automation testing,        helps both researchers and practitioners to evaluate a cross-
+where each tool has different approaches, and they faced a lot       platform, the framework is based on weighted holistic evalu-
+of difficulties to simulate the scrolling and opening the camera,    ation criteria which were developed with help of the domain
+they mentioned the needs for studies that investigate the cross-     experts judge and critical review for 30 papers about the cross-
+platform automation for the different platform as well.              platform, by taking into consideration future evaluation of the
+   Reference [13] developed a general framework to cover the         technology stack, this proposed framework is an extension to
+automation testing techniques for the mobile apps but didn’t         a prior work [20] that also attempts to provide an evaluation
+shed the light on any area related to cross-platform, while          criterion based on a predefined catalogue.
+[14] introduce the automation for testing accessibility on the          Reference [20] identified 34 criteria classified into four
+mobile applications same as [13], they didn’t touch the cross-       major categories two evaluate the cross platform frame-
+platform in specific but settled to cover only apps for the          works, application perspective, usage perspective, develop-
+Android platform, on the other hand [15] conducted a survey          ment perspective and infrastructure perspective, while [19]
+for the current state of the art tools, frameworks, and services     developed a framework to evaluate the cross- platform, but
+available for the applications developers to do automation test,     their comparison was based on the below measures, User
+they performed the survey on ten Automation’s frameworks,            Experience, Easiness of Development, and appearance, they
+their findings were that ten platforms were able to do the GUI       finally mentioned in their conclusion that the cross-platform
+automation’s, while two of them were able to perform the same        still have weakness on the UX side, while [21] performed a
+test on cross-platform apps, four of the frameworks were able        comprehensive comparison analysis for three cross-platform,
+to perform the test but with limited capabilities and the remain     React Native, Fuse, and Ionic, the research aimed to provide
+three were not able to perform the tests.                            the developers with advice when choosing between the three
+   Reference [15] in their conclusion second on what has been        platforms, they performed an online survey with more than 100
+concluded by [12] that the frameworks have limitations when          receiving responses, in addition to that, survey was supported
+it’s dealing with the apps developed using cross-platform,           by building a prototype model to assets the survey.
+where the framework will be supporting single object like               Reference [21] comparison shows that User experience,
+the scrolling, pinching, and zooming, while [17] in their            technical implementation, performance, and item testability
+research proposed mutation testing to perform the test for           are the most common issues when developing cross-platform
+cross-platform applications, they developed an open-source           applications, Majchrzak, Biørn-Hansen, and Grønli [21] in
+application called MuHyb, in their research, they test the           their conclusion mentioned that there is no specific winner
+framework on an application used for food delivery, the appli-       between the selected frameworks, and a few problems need
+cation built using Ionic framework, the testing tools managed        to be investigated such as the human side particularity in the
+to generate 149 mutants, 84 mutants killed, 22 discarded and         form of the end-user experience.
+43 using survived, with total mutations score of 66.14%.                Reference [22] investigated the difference between the na-
+   Ahmed, Taj-Eddin, and Ismail in [17] mentioned that               tive and the cross platforms, their goal was to evaluate the
+MuHyb was the first tool in the market that performed muta-          cross-platform for non-experienced and students’ developers,
+tion testing for cross-platform applications, in their conclusion    they provide a four-month course that included the simple
+they mentioned that MuHyb supports only Ionic as a limitation        features in both the native and the cross-platform, which was
+to their research, and it will be developed to support extra cross   then followed by a questionnaire shared with 169 applicants
+platforms in the future.                                             including 30 experienced developers, Meirelles, Aguiar, Assis,
+   Kong et al. [16] conducted a systematic literature review         Siqueira, and Goldma [22] in their results mentioned that
+to shed the light on the main trends, methodologies, and pain        students and experienced developers preferred native devel-
+points for testing android apps, they listed seven tools used        opment when need to achieve high performance, while if the
+to do automation testing for the Android applications, thier         performance and the device access is not an essential part
+results didn’t mention if the tools were used to test cross-         of the application, the cross-application can be considered as
+platform, or if the applications used were built using cross-        a choice for the developers matching the findings achieved
+by others in [4]–[6], on the other hand [24] developed a              •   RQ1: What are the differences between Flutter and React
+framework to evaluate the cross platforms based on the energy             Native in term of testing automation record and play?
+consumption, considering that it’s one of the most important          •   RQ2: What are the differences between Flutter and Re-
+factors when selecting cross platforms.                                   act Native in term of test automation Integration from
+                                                                          external SDK?
+                                                                      •   RQ3: What are the differences between Flutter and
+                                                                          React Native in term of test automation compatibility
+                                                                          when running on different Android devices?
+
+                                                                      We later developed ToDo List apps in Flutter and React
+                                                                    Native for the following reasons:
+                                                                      • Developing a ToDo List application is achievable within
+                                                                         the limits of this research.
+                                                                      • The nature of these applications are straightforward to
+                                                                         implement.
+
+                                                                    The goal of this application is to assess how automation
+                     Fig. 2. Users Review results [23]              frameworks handle new items that need to be added to the UI,
+                                                                    delete objects from the UI, test scrolling functionality, and test
+   Reference [24] conclude the same that has been discovered        gesture actions, we performed the test on Android OS. only
+by others in [4]–[6], [22] , where the cross platforms energy       for the following reasons:
+consumption is higher than native platforms and considering            • Android is an open-source operating system that enables
+selecting the cross-platform could be a bad choice when                  unlimited study.
+the performance is a key factor for the application, and the           • Android devices have a bigger market share than iOS
+native languages could act better than the cross-platform,               devices.
+while [23] perform research to investigate the effect of the           • The availability of Android emulators and the ability to
+cross-platform on the user experience, they used the Natural             link it with different IDE’s compared to iOS.
+programming languages (NLP) to collect the reviews posted              • Running on iOS requires the use of Mac computers for
+by the users on Google Play and Apple Store, Mercado,                    compilation, which is not available.
+Munaiah, and Meneely collected 787,228 related to 50 apps
+to investigate the relations between the User Experience and          We utilized TestProject.io Platform as a service to conduct
+cross-platform, they classified all collected comments into four    our experiment, TestProject.io simply require an internet con-
+metrics, performance, usability, security, and reliability where    nection and a web browser to use, the selection of this tool
+also they used machine learning to train the model to perform       was based on various benefits that it has over other testing
+such clarifications, the results of their investigation have been   tools, including but not limited to:
+concluded in “Fig. 2”.                                                • Detection of elements using Xpath, element ID, and
+
+                          METHODOLOGY                                    position.
+                                                                      • Playback and recording.
+   The section’s goal is to present our research question as
+                                                                      • Script generation in several languages, including Java.
+well as the research methodologies we used, to achieve exact
+                                                                      • Reporting tools for completed test cases.
+findings for this study, we used a methodical approach to
+                                                                      • It is free and does not require any licensing.
+working with and comparing the two frameworks from an
+automated testing standpoint, we looked for identical applica-
+tion created in Flutter and React Native in open-source code           We evaluated and compared the two cross-platforms, Flutter
+repositories (GitHub and SourceForge) so we could conduct           and React Native, and established the evaluation criteria that
+our experiment, there were no apps that met our criterion,          need to be examined systematically based on our literature
+and some others required payment to obtain the source code,         analysis, we determined three parameters to be assessed,
+so we created an identical application on Flutter and React         which are the follwoing: 1) Re-Usability 2) Integration 3)
+Native, as the same coding approaches will be utilized for          Compatibility, to measure each parameter in this study, four
+both frameworks, we will gain superior outcomes, all created        criteria have been developed, Table 2 presents the criteria used
+artifices and source code have been uploaded and contributed        to utilize and evaluate our parameters.
+to GitHub to ensure verification and to allow others to use the        Criteria C1 identify the ability of the automation testing
+source code in the future 2 , the following research questions      tools to detect the UI elements on each cross-platform inspired
+have been developed to draw the path of our research:               by [25], while criteria C2 identifies the ability of the teasing
+                                                                    tools to generate scripts that can be used to run the same
+  2 https://github.com/habuzahra/                                   test for the same artifact on different cross platforms inspired
+                              TABLE I                                             explains the criteria that will be used to measure this
+        S ELECTED C RITERIA FOR EVALUATION OUR PARAMETERS                         characteristic.
+          ID          Criteria Name              Category
+          C1        Element Detection           Re-usability                                               TABLE IV
+          C2        Scripts Generation          Integration                                         C OMPATIBILITY C ATEGORY
+          C3           GUI Testing              Re-usability
+          C4    Running on different devices   Compatibility                 Criteria Name                         Description
+                                                                             Different devices                    This criterion will tell if the au-
+                                                                                                                  tomation scripts will be work suc-
+                                                                                                                  cessfully on different android de-
+                                                                                                                  vices from different manufacturers,
+by [26], criteria C3 identifies the ability to run the test on                                                    we used the following three differ-
+the generated artifacts on different cross platforms such as                                                      ent devices:
+scrolling and navigation inspired by [27], criteria C4 identify                                                     – Samsung Note 20,
+                                                                                                                    – Oppo F11
+the ability of the automation testing tools to run on the same                                                      – Xiaomi Redmi Note 9
+tests on other devices inspired by [25].
+   To meet the aims of this research and compare Flutter and
+the React Native framework from the standpoint of Automa-                     •   The Ability to integrate criteria will explain if the au-
+tion testing, the two frameworks will be compared, and the                        tomation testing tools will be able to integrate with
+criteria that have been chosen will be evaluated, we chose data                   the generated artifacts from each framework, where we
+collection methodology for each of the selected criteria so that                  will examine the possibility to integrate and pass data
+we can build our measurements and quantify the results of the                     from external sources to be able to perform the test and
+comparison between the selected frameworks, which will help                       integrate using external SDK, Table 5 explains the criteria
+to answer the research questions, for the sake of this research                   that will be used to measure this characteristic.
+test cases have been written as per Table 6 to be able to execute
+our experiment on it.                                                                                        TABLE V
+   As stated at the outset of our research, the assessment                                       A BILITY TO INTEGRATE C ATEGORY
+criteria were divided into three categories:
+                                                                             Criteria Name                        Description
+   • The re-usability criterion will describe how the UI com-                Integration                          This criterion will tell if the au-
+      ponents can be identified using the automation tools,                                                       tomation testing tools will be able
+                                                                                                                  to integrate with the generated arti-
+      finding the elements will allow the reuse and extension of                                                  facts from each cross platform us-
+      the scripts instead of recording again, Table 3 describes                                                   ing external SDK, this will help to
+      the criteria for measuring this characteristic.                                                             write unit test cases by the develop-
+                                                                                                                  ers and extend the testing abilities.
+
+                              TABLE II
+               S ELECTED C RITERIA DATA C OLLECTION
+
+   ID          Criteria Name              Data Collection                                    RESULTS AND DISCUSSION
+   C1          Record and play            Identify the UI elements
+   C2          Scripts Generation         Are both artifacts accept            This section discusses the results that were acquired during
+                                          integration.                      the run of the test scripts over the two cross platforms, the total
+   C3          GUI Testing                Are both artifacts can sup-
+                                          port GUI test                     amount of executed test cases were 90 test cases distributed
+   C4          Running on different de-   Can the recorded scripts          over the 3 identified categories, Re-usability, Integration, and
+               vices                      run on different devices          compatibility and performed over 3 devices, Samsung Note
+                                                                            20 , Xiamomi Redmi Note 9, and Oppo F11, Judging by
+                                                                            the results, we could conclude that for the Re-usability and
+                                TABLE III                                   compatibility, React Native was performing better in term of
+                       R E - USABILITY C ATEGORY                            the success rate of the executed test cases, we measured that
+ Criteria Name                       Description                            for the Re-usability, the success rate of the executed test cases
+ Element Detection                   This criterion will tell if the UI     for React Native was 88.89% while for Flutter it was 66.67%
+                                     elements of the generated artifacts    as shown in “Fig. 3”
+                                     can be detected, this will include
+                                     the detection of the text box, Popup      RQ1: What are the differences between Flutter and React
+                                     message, views, Buttons, Labels,       Native in term of testing automation Record and Play? To
+                                     etc.                                   answer this research question, we compared both Flutter and
+                                                                            React Native based on the generated results, as demonstrated,
+  •   The compatibility criteria will explain how the testing for           there is a significant difference between results on each
+      the generated artifacts will work for each cross-platform             artifact, this is due to the fact that the automation tool was
+      and examine if the generated scripts of the automation                not able to detect the UI elements correctly in the generated
+      tool will work on different Android devices, Table 4                  artifacts from Flutter, while for the artifact that is generated
+                                                                                                    TABLE VI
+                                                                                                   T EST CASES
+
+                                                                    Test case Name                        Expected results
+                                                                    In the login screen enter valid       The application should route you to
+                                                                    email address and password            the Today Tasks Screen.
+                                                                    In the login screen enter invalid     The application should display er-
+                                                                    email address and password            ror message popup.
+                                                                    On the login screen press on the      The application should route you to
+                                                                    sign-up link                          the sign-up page.
+                                                                    In my task screen add new task and    The task should be added.
+            Fig. 3. Re-usability Parameter results analysis         press add to List
+                                                                    In my task screen try delete the      The task should be added.
+                                                                    added task
+from React Native, the tool was able to detect all the of the       Try to add empty task                 The task should be deleted.
+UI elements.                                                        Try to add empty task                 The application should display to
+                                                                                                          you error message popup.
+   For the integration it has been measured that both frame-        Add 10 tasks and scroll down          The application screen should al-
+works showed the same capability and support with 100%                                                    low you to scroll down and view
+success rate for the executed tests as shown in “Fig. 4”.                                                 all the added tasks.
+
+
+
+
+                                                                   disproved that, even our application is small application,
+                                                                   but the results showed that the final output of each artifact
+                                                                   has led to different results, this is due to the fact that the
+                                                                   underneath compilation and the way the generated artifact is
+                                                                   being produced is totally different in each framework, and
+                                                                   may have significant effect on the testing phase when the
+                                                                   applications are large and have complex features such as,
+                                                                   location detection, device sensors, body motions and so on.
+
+                                                                                             CONCLUSION
+             Fig. 4. Integration Parameter results analysis
+                                                                      In this study, React Native and Flutter were systematically
+   RQ2: What are the differences between Flutter and React         compared from the perspective of automation testing. It was
+Native in term of test automation Integration from external        discovered that React Native outperformed Flutter in terms of
+SDK? To answer this research question, we compared both            reusability and compatibility, with no discernible difference in
+Flutter and React Native based on the generated results, as        terms of integration.
+shown in Figure 4, we found that there is no significant              However, this study pursued a different strategy to contrast
+differences between the results on each artifact.                  React Native with Flutter from the perspective of automation
+   On the other hand, the success rate for the compatibility       testing. Prior research mainly examined the effectiveness and
+for React Native was 88.9% on Samsung and Xiamoi, while            performance of cross-platform frameworks. There are a few
+on Oppo the success rate was 77.78%, while on Flutter the          warnings made to the current study. First, we removed iOS
+success rate of the executed test cases was 66.67% on all          from our testing and solely used an Android device, which
+devices.                                                           may have revealed other variances. Similarly, we chose just
+   RQ3: What are the differences between Flutter and React         one platform for automation testing. Even if the majority of
+Native in term of test automation compatibility when running       automation tools offer comparable features, more automation
+on different android devices? To answer this research question,    tools ought to be included. If work is to take place in the future,
+we compared both Flutter and React Native and executed the         iOS, additional automation testing frameworks, and other types
+test cases in Table 6 on three different devices as shown in       of devices might be included.
+“Fig. 5”, based on the generated results, there is significant
+differences between the results on each artifact on each                                       R EFERENCES
+different device, this due to the fact that the screen size of        Please number citations consecutively within brackets [1].
+Opp F11 is different where it’s 6.5 while the others are 6.7,      The sentence punctuation follows the bracket [2]. Refer simply
+hence extra step need to be added to handle the different screen   to the reference number, as in [3]—do not use “Ref. [3]”
+size.                                                              or “reference [3]” except at the beginning of a sentence:
+   The hypothesis prior running the tests was that both Flutter    “Reference [3] was the first . . .”
+and React Native would perform significantly the same, that           Number footnotes separately in superscripts. Place the ac-
+guess was because the automation platform will not be able         tual footnote at the bottom of the column in which it was
+to distinguish between the final generated artifacts (APK)         cited. Do not put footnotes in the abstract or reference list.
+file from each platform, the results that have been acquired       Use letters for table footnotes.
+                                                                                [15] M. Linares-Vásquez, K. Moran, and D. Poshyvanyk, “Continuous,
+                                                                                     evolutionary and large-scale: A new perspective for automated mobile
+                                                                                     app testing,” Proc. - 2017 IEEE Int. Conf. Softw. Maint. Evol. ICSME
+                                                                                     2017, pp. 399–410, 2017.
+                                                                                [16] P. Kong, L. Li, J. Gao, K. Liu, T. F. Bissyandé, and J. Klein, “Automated
+                                                                                     testing of Android apps: A systematic literature review,” IEEE Trans.
+                                                                                     Reliab., vol. 68, no. 1, pp. 45–66, 2019.
+                                                                                [17] S. Ahmed, I. A. T. F. Taj-Eddin, and M. A. Ismail, “MuHyb: A Proposed
+                                                                                     Mutation Testing Tool for Hybrid Mobile Applications,” ACM Int. Conf.
+                                                                                     Proceeding Ser., pp. 67–72, 2020.
+                                                                                [18] A. R. Hevner, S. T. March, J. Park, and S. Ram, “Essay in Information
+                                                                                     Design Science systems,” Manag. Inf. Syst., vol. 28, no. 1, pp. 75–105,
+                                                                                     2004.
+                         Fig. 5. Compatibility Parameter results analysis       [19] V. Ahti, S. Hyrynsalmi, and O. Nevalainen, “An evaluation framework
+                                                                                     for cross-platform mobile app development tools: A case analysis of
+                                                                                     adobe PhoneGap framework,” ACM Int. Conf. Proceeding Ser., vol.
+                                                                                     1164, no. June, pp. 41–48, 2016.
+   Unless there are six authors or more give all authors’ names;                [20] C. Rieger and T. A. Majchrzak, “Towards the definitive evaluation
+do not use “et al.”. Papers that have not been published,                            framework for cross-platform app development approaches,” J. Syst.
+even if they have been submitted for publication, should be                          Softw., vol. 153, pp. 175–199, 2019.
+                                                                                [21] T. A. Majchrzak, A. Biørn-Hansen, and T. M. Grønli, “Comprehen-
+cited as “unpublished” [4]. Papers that have been accepted for                       sive analysis of innovative cross-platform app development frame-
+publication should be cited as “in press” [5]. Capitalize only                       works,” Proc. Annu. Hawaii Int. Conf. Syst. Sci., vol. 2017-Janua, pp.
+the first word in a paper title, except for proper nouns and                         6162–6171, 2017.
+                                                                                [22] P. Meirelles, C. S. R. Aguiar, F. Assis, R. Siqueira, and A. Goldman, A
+element symbols.                                                                     Students’ Perspective of Native and Cross-Platform Approaches for Mo-
+   For papers published in translation journals, please give the                     bile Application Development, vol. 11623 LNCS. Springer International
+English citation first, followed by the original foreign-language                    Publishing, 2019.
+                                                                                [23] I. T. Mercado, N. Munaiah, and A. Meneely, “The impact of cross-
+citation [6].                                                                        platform development approaches for mobile applications from the user’s
+                                                                                     perspective,” WAMA 2016 - Proc. Int. Work. App Mark. Anal. co-
+                                        R EFERENCES                                  located with FSE 2016, pp. 43–49, 2016.
+                                                                                [24] M. Ciman and O. Gaggi, “An empirical analysis of energy consumption
+ [1] K. Mehmood, M. K. Ashraf, and M. Nouman, “Mobile UX design”.                    of cross-platform frameworks for mobile development,” Pervasive Mob.
+ [2] A. E. Fentaw and Cross, “Cross platform mobile application develop-             Comput., vol. 39, pp. 214–230, 2017.
+     ment: a comparison study of React Native Vs Flutter,” p. 98, 2020.         [25] P. Raulamo-Jurvanen, M. Mäntylä, and V. Garousi, “Choosing the right
+ [3] S. Stender and H. Åkesson, “Cross-platform Framework Comparison:               test automation tool: A grey literature review of practitioner sources,”
+     Flutter React Native,” vol. 6, 2020.                                            ACM Int. Conf. Proceeding Ser., vol. Part F1286, pp. 21–30, 2017.
+ [4] T. Zohud and S. Zein, “Cross-Platform Mobile App Development in            [26] H. V. Gamido and M. V. Gamido, “Comparative review of the features
+     Industry: A Multiple Case-Study,” Int. J. Comput., vol. 20, no. 1, pp.          of automated software testing tools,” Int. J. Electr. Comput. Eng., vol.
+     46–54, 2021.                                                                    9, no. 5, pp. 4473–4478, 2019.
+ [5] A. Biørn-Hansen, T. M. Grønli, G. Ghinea, and S. Alouneh, “An              [27] E. Börjesson and R. Feldt, “Automated system testing using visual GUI
+     Empirical Study of Cross-Platform Mobile Development in Industry,”              testing tools: A comparative study in industry,” Proc. - IEEE 5th Int.
+     Wirel. Commun. Mob. Comput., vol. 2019, 2019.                                   Conf. Softw. Testing, Verif. Validation, ICST 2012, pp. 350–359, 2012.
+ [6] L. Delia et al., “Development approaches for mobile applications:
+     Comparative analysis of features,” Adv. Intell. Syst. Comput., vol. 857,
+     pp. 470–484, 2019.
+ [7] M. Huynh and P. Ghimire, “Browser app approach: Can it be an answer
+     to the challenges in cross-platform app development?,” J. Inf. Technol.
+     Educ. Innov. Pract., vol. 16, no. 1, pp. 47–68, 2017.
+ [8] A. Biørn-Hansen, T. M. Grønli, and G. Ghinea, “A survey and taxonomy
+     of core concepts and research challenges in cross-platform mobile
+     development,” ACM Comput. Surv., vol. 51, no. 5, 2019.
+ [9] M. Martinez, “Two datasets of questions and answers for studying
+     the development of cross-platform mobile applications using Xamarin
+     framework,” Proc. - 2019 IEEE/ACM 6th Int. Conf. Mob. Softw. Eng.
+     Syst. MOBILESoft 2019, pp. 162–173, 2019.
+[10] T. M. Gronli and G. Ghinea, “Meeting quality standards for mobile
+     application development in businesses: A framework for cross-platform
+     testing,” Proc. Annu. Hawaii Int. Conf. Syst. Sci., vol. 2016-March, pp.
+     5711–5720, 2016, doi: 10.1109/HICSS.2016.706.
+[11] A. A. Menegassi and A. T. Endo, “Automated tests for cross-platform
+     mobile apps in multiple configurations,” IET Softw., vol. 14, no. 1, pp.
+     27–38, 2020.
+[12] M. Mahendra and B. Anggorojati, “Evaluating the performance of
+     Android based Cross-Platform App Development Frameworks,” ACM
+     Int. Conf. Proceeding Ser., pp. 32–37, 2020.
+[13] D. Amalfitano, N. Amatucci, A. M. Memon, P. Tramontana, and A.
+     R. Fasolino, “A general framework for comparing automatic testing
+     techniques of Android mobile apps,” J. Syst. Softw., vol. 125, pp.
+     322–343, 2017.
+[14] M. M. Eler, J. M. Rojas, Y. Ge, and G. Fraser, “Automated Accessibility
+     Testing of Mobile Apps,” Proc. - 2018 IEEE 11th Int. Conf. Softw.
+     Testing, Verif. Validation, ICST 2018, no. Figure 1, pp. 116–126, 2018.
+
+
+
+
+View publication stats
+
