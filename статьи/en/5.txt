@@ -1,848 +1,261 @@
-IET Software
+   76                                       Technical sciences
 
+     COMPARATIVE ANALYSIS OF TWO MOST POPULAR JAVASCRIPT
+       FRAMEWORKS FOR MOBILE APPLICATION DEVELOPMENT
+                                                Ten T.L., Chernov S.S.
+            Karaganda Economic University, Karaganda, e-mail: chernov.home@gmail.com
 
-Research Article
+            This article presents a comparative analysis of two of the most popular Java Script frameworks for develop-
+      ment of a mobile application such as Ionic 2 and React Native. At the very beginning, necessity of having mobile
+      applications in modern times was considered. After that, the article explained a way mobile applications are distrib-
+      uted among their consumers. Then the author continues with a general explanation of the main functions of each of
+      the frameworks. Furthermore, each framework’s features will be discussed. Moreover, the way of writing the code
+      using each of the tools will be also explained. Then we will focus on the debugging process for both Ionic 2 and
+      React Native; look at the way how to work with styles; we will consider how the precise tool influences the size of
+      the final application. Next, frameworks will be compared depending on their popularity. Finally, the conclusion will
+      be provided in the form of a list of the main advantages and disadvantages of compared tools.
 
-
-Automated tests for cross-platform mobile                                                                     ISSN 1751-8806
-                                                                                                              Received on 18th December 2018
-                                                                                                              Revised 27th June 2019
-apps in multiple configurations                                                                               Accepted on 9th September 2019
-                                                                                                              E-First on 28th November 2019
-                                                                                                              doi: 10.1049/iet-sen.2018.5445
-                                                                                                              www.ietdl.org
-
-Andre Augusto Menegassi1,2, Andre Takeshi Endo1
-1Department    of Computing, Federal University of Technology – Parana (UTFPR), Avenida Alberto Carazzai 1640, Cornelio Procopio, Brazil
-2Universidade   do Oeste Paulista (Unoeste), R. Jose Bongiovani 700, Presidente Prudente, Brazil
-    E-mail: andreendo@utfpr.edu.br
-
-Abstract: Cross-platform apps stand out by their ability to run in various operating systems (OSs), such as Android, iOS, and
-Windows. Such apps are developed using popular frameworks for cross-platform app development such as Apache Cordova,
-Xamarin, and React Native. However, the mechanisms to automate their tests are not cross-platform and do not support
-multiple configurations. Hence, different test scripts have to be coded for each platform, yet there is no guarantee they will work
-in different configurations varying, e.g. platform, OS version, and hardware available. This study proposes mechanisms to
-produce automated tests for cross-platform mobile apps. In order to set up the tests to execute in multiple configurations, the
-authors’ approach adopts two reference devices: one running Android and other iOS. As both platforms have their own user
-interface (UI) XML representation, they also investigated six individual expression types and two combined strategies to locate
-UI elements. They have developed a prototype tool called cross-platform app test script recorder (x-PATeSCO) to support the
-proposed approach, as well as the eight locating strategies considered. They evaluated the approach with nine cross-platform
-mobile apps, comparing the locating strategies in six real devices.
-
-
-
-1     Introduction                                                        common code base, though platform-specific builds are needed.
-                                                                          [When mentioned that a cross-platform app is run, this study means
-Currently, mobile devices permeate the daily life of most people          that it is a proper platform-specific build of the app.] Other
-and are available in various formats, mostly as smartphones,              approaches to cross-platform development are frameworks such as
-tablets, and wearables. They are equipped with powerful                   React Native (https://facebook.github.io/react-native) and Xamarin
-processors, large storage capacity, and several sensors [1]; modern       (https://www.xamarin.com). They support the creation of apps with
-operating systems (OSs) control the hardware of those devices. In a       native user interface (UI) elements using programming languages
-survey from International Data Corporation (IDC) [2] about the            such as Javascript and C#. The final product is a native and cross-
-market share of mobile OSs, Android and Apple iOS were the most           platform app [7–9]; in this work, we adopt the term native cross-
-consumed platforms in the first quarter of 2017, with 85 and              platform for this type of app.
-14.7%, respectively. Other surveys of Gartner [3] brought the sales           Cross-platform app testing is challenging due to the variability
-of smartphones in the first quarter of 2017; the Android platform         of device settings and mobile OSs on the market [1, 10, 11]. As
-(86.1%) was the market leader, followed by the Apple iOS                  testing the app in a single device does not guarantee the correct
-platform (13.7%). Such OSs serve as a platform for executing a            operation in others [12, 13], each device represents a configuration
-wide variety of software applications called mobile apps. The             (platform, hardware, screen size, sensors etc.) that needs to be
-Statista site [4] offers statistics about the number of apps available    verified. While automation is essential to cover many
-for download in the main distribution stores: Android has the             configurations, the current test mechanisms are not cross-platform.
-largest number of apps available to its users with 2.8 million apps       For instance, a UI test script using a tool such as Appium (http://
-and Apple iOS has 2.2 million apps.                                       appium.io/) has to be written twice since the UI's XML
-    The development of mobile apps can be classified into three           representations of Android and iOS are different. Such
-groups: native apps, browser-based Web apps, and hybrid apps [5].         representations may also be different between versions of the same
-Native apps are developed using the mobile OS Software                    platform, such as in Android 4 and Android 6 [14]; this implies that
-Development Kit (SDK), taking full advantage of the device                two or more scripts might be needed for different versions of the
-functions as well as the OS itself. Web apps are developed with           same OS. The maintenance of UI test scripts has been known to be
-technologies to build software for the Web such as HTML5, CSS3,           a costly task [15–17], and cross-platform apps aggravate it by
-and Javascript [6]. They are stored on a Web server, run under a          requiring two or more versions of the same test script. Existing
-client browser, and do not have access to advanced features of the        tools and research on automated testing have focused on specific
-mobile OS. Finally, hybrid apps combine Web technologies such as          platforms [18]; however, there is a lack of approaches for
-HTML5, CSS3, and Javascript (using a native component known               automated testing of cross-platform apps.
-as WebView) with plugins that access the OS native application                This study introduces an approach to generate scripts to test
-programming interfaces (APIs). Commercial and open source                 cross-platform mobile apps in multiple configurations. The
-frameworks support the development of hybrid apps, such as                approach relies on a reference device for each OS; currently, we
-Apache Cordova (https://cordova.apache.org), PhoneGap (http://            have worked with the Android and iOS platforms. As it focuses on
-phonegap.com), Sencha Touch (https://www.sencha.com), IONIC               black-box testing at the system level, strategies to locate UI
-(http://ionicframework.com/),         and    Intel   XDK      (https://   elements are also investigated. In particular, we analysed six
-software.intel.com/xdk).                                                  individual expression types and two combined strategies. The
-    Unlike native apps, hybrid apps have the advantage of                 approach and the locating strategies have been implemented in a
-executing across multiple platforms. Cross-platform apps have             prototype tool named cross-platform app test script recorder (x-
-gained momentum due to their ability to be built for different OSs,       PATeSCO). To evaluate the approach and compare the locating
-reducing the need for specific-platform code. Such an app has a
-                                                                          strategies, we conducted an experimental study with nine cross-
-
-IET Softw., 2020, Vol. 14 Iss. 1, pp. 27-38                                                                                                27
-© The Institution of Engineering and Technology 2019
-platform mobile apps tested on six real devices (multiple
-configurations).
-   In summary, this study has the following contributions.
-
-• We describe the difficulties of implementing automated tests for
-  cross-platform apps for different OSs such as Android and iOS
-  (Section 2).
-• We introduce an approach that supports the generation of scripts
-  capable of testing cross-platform apps in several configurations.
-  The approach is supported by the investigation of six individual
-  XPath expressions and two combined strategies (Section 3).
-• We present x-PATeSCO, an interactive tool that automates the
-  use of the proposed approach (Section 4).
-• We describe an extensive experimental evaluation of the
-  proposed approach with nine open source and industrial apps. In
-  the experiments, we evaluate the effectiveness and the
-  performance of the proposed approach and associated locating
-  strategies (Section 5).
-
-This paper is structured as follows: Section 2 motivates the
-research problem. Section 3 introduces an approach to test cross-
-platform mobile apps. Section 4 describes the prototype tool and
-the experimental evaluation is shown in Section 5. Section 6
-discusses on the obtained results. Section 7 brings the related work.
-Finally, Section 8 concludes the paper and sketches of future work.
-
-2    Research problem
-This section exemplifies the research problem with a hybrid app
-developed with Apache Cordova. Nevertheless, this problem is
-shared by all cross-platform apps, even the ones developed with
-native cross-platform frameworks such as Xamarin and React
-Native. UIs of a hybrid app are built using HTML elements, which
-are interpreted and transformed into an XML structure by the
-mobile platform. This structure differs between the platforms, as
-shown in Fig. 1.
-    Notice that HTML element <a id = ‘search’..> of the
-Fresh Food Finder app (https://github.com/triceam/Fresh-
-Food-Finder) has two representations, one presented by Android           Fig. 1 Android and iOS UI representations
-and other by iOS. Such a structure might differ even within the
-same platform. Table 1 presents a brief mapping between HTML             Table 1 HTML to XML native UI elements
-and XML native UI elements generated by the Android and iOS              HTML element type     Android element                  iOS element
-platforms.                                                               input button                 android.widget.Button      UIAButton
-    XML nodes are composed of key attributes that contain                input submit                 android.widget.Button      UIAButton
-descriptive information of UI elements; some of them are viewed          Div                           android.widget.View      UIAStaticText
-by the app users. For the Android platform, such key attributes are
-                                                                         Span                          android.widget.View      UIAStaticText
-‘content-desc’ and ‘text’, while for iOS the attributes are ‘label’
-and ‘value’. Element identifier attributes are also available, namely    Label                         android.widget.View      UIAStaticText
-‘resource-id’ for Android and ‘name’ for iOS.                            Select                      android.widget.Spinner     UIAElement
-    Element selectors are used to automate UI test cases of mobile       input text                  android.widget.EditText    UIATextField
-apps. A test case consists of test input values, execution conditions,   Textarea                    android.widget.EditText    UIATextField
-and expected results, designed to achieve a specific objective [19].     a (anchor)                    android.widget.View        UIALink
-Selectors are ‘patterns’ or ‘models’, which provide mechanisms to
-locate elements (or nodes) in computational structures, such as
-XML or HTML [20]. After selecting a UI element, the tester can           platform-specific. Only the attribute values remained the same in
-programme an action or verify a property. A well-known                   both platforms.
-mechanism for selecting XML elements are query expressions in                At least, the tester has to identify and code two selectors to test
-XPath, a query language for selecting elements (nodes) in                the same UI element. Yet, there is no guarantee that the automated
-computational structures which represent XML documents [21].             test will work for other configurations, with different OS version,
-    As shown in Fig. 1, the platform manufacturers do not follow a       hardware manufacturer, sensors, and so on. To improve the testing
-common standard to represent UI elements. Such differences               of cross-platform apps, we aim to propose an approach to record
-reflect negatively on the test activities for cross-platform apps. The   and generate a single test script capable of performing in different
-app is developed with features that enable its cross-platform            configurations.
-execution, but the mechanisms to test it are not. Therefore,
-different test scripts are required to automate the testing of the
-same UI, each one with appropriate selectors. For example, the           3   Approach overview
-XPath selectors required to select the highlighted element in Fig. 1     Our approach defines a mechanism to automate the testing of
-(button ‘Search for a market’) suitable for Android 6.0.3 is ‘//*/       cross-platform apps by constructing a test script to be run in
-android.view.View[@content-desc=‘Search                      For     a   multiple configurations. We based on the insight that using a
-Market’]’         and      for       iOS        9.3       is     ‘//*/   reference device for each platform, a robust automated test can be
-UIAStaticText[@label=‘Search For a Market’]’. These                      produced by investigating and combining individual expressions.
-XPath queries use the element type and key attributes that are           To do so, we propose an approach divided into three main steps,
-                                                                         illustrated in Fig. 2. First, a reference device is chosen for each
-
-28                                                                                                   IET Softw., 2020, Vol. 14 Iss. 1, pp. 27-38
-                                                                                        © The Institution of Engineering and Technology 2019
-Fig. 2 Approach overview
-
-                                                                             During the UI element selection, the XML structure of app's UI
-                                                                         is extracted. Based on this structure, each UI element has its type
-                                                                         identified (textbox, button, anchor etc.), as well as its key and
-                                                                         identified attributes with its respective values are stored. This data
-                                                                         supports the construction of different XPath expressions to locate
-                                                                         the element for the event under test. This study investigates six
-                                                                         individual expressions: AbsolutePath and IdentifyAttributes
-                                                                         represent the state-of-practice for UI selectors; CrossPlatform is a
-                                                                         tentative to provider a unique selector for both platforms;
-                                                                         ElementType, AncestorIndex, and AncestorAttribute are based on
-Fig. 3 ESGs modelling the events under test                              experience-based guidelines to have more generic and robust
-                                                                         XPath expressions. The six expressions are described along with
-platform; in this work, we have one running Android CRef 1, and          examples for the UI in Fig. 1, as follows.
-other running iOS CRef 2 (Fig. 2a, Section 3.1). Second, we define           AbsolutePath: It is a platform-specific expression, based on the
-an event-driven model to represent the test cases and six individual     absolute path from the root to the given element. In some cases,
-expressions to locate UI elements were investigated (Fig. 2b,            indexes are required to identify the element position within the
-Section 3.2). Third, it proposes a single test script generation and     XML structure. This expression has been employed in Web
-defines two strategies that combine individual expressions in a          application testing to find elements in the document object model
-more robust setting (Fig. 2c, Section 3.3). The three steps are          (DOM) structure [25]. It is a well-known alternative when the
-detailed in the following subsections.                                   element has no identifier attribute. An example is shown as
-                                                                         follows:
-3.1 Device selection
-This step consists of selecting a mobile device for each platform,
-namely one Android and other iOS. Testers might take several
-aspects into account to decide such as popularity, availability, final
-users, and so on. Some studies suggest choosing mobile devices for
-app testing based on their general popularity among end users [22,
-23]. The selection of reference devices might also come from an
-existing demand; for instance, specific apps from a given business
-organisation run in a controlled set of devices.
-   While different criteria may be defined and applied to select the         IdentifyAttributes: It is an expression based on the values of
-devices, any pair of reference devices can be used. The selected         attributes that identify the element, such as resource-id for the
-devices are then referred to as reference configurations: CRef 1 and     Android platform and name for the iOS platform. Such expression
-CRef 2. In addition, a cross-platform mobile app under test (AUT)        is also well-known for Web applications [25, 26]. Attribute id is
-should be installed on those devices.                                    one of the primary strategies to locate HTML elements. An
-                                                                         example is shown as follows:
-3.2 UI element selection and test case definition
-This step defines a model to express the test cases. In particular, we
-want to represent the expected event sequence of the user's
-interactions with the AUT. We adopted an event sequence graph                CrossPlatform: We propose it to define a single expression for
-(ESG) [24] to model the test case as a sequence of UI events             different platforms. Such an expression is prepared to select a
-(nodes) connected by edges; two ESGs are shown in Fig. 3. For            particular element from the app's UI independent of its execution
-each event, a UI element is selected and some action is executed         platform. It combines key attributes (Android: content-desc or text
-(e.g. a click or an input text). This step is reproduced in the          and iOS: label or value) of elements and their values on both
-reference devices and two compatible ESGs are generated. The             platforms, as discussed in Section 2. Rao and Pachunoori [27]
-ESG compatibility is related to both models with the same number         suggest the use of expressions that combine attributes when the
-of events and data/action provided for each element. Fig. 3 shows a      identifier attribute is not available. In our study, we combine the
-generic example of a test case; there is one ESG for each platform:      attributes of the two platforms in a single expression. An example
-Android and iOS, respectively. The ESG represents a test case and        is shown as follows:
-each node (e1, …, e3) is an element with data needed for its test.
-For the example and all test cases used in the experiment (Section
-5), the sequence of UI events was the same in both platforms.
-
-IET Softw., 2020, Vol. 14 Iss. 1, pp. 27-38                                                                                                 29
-© The Institution of Engineering and Technology 2019
-                                                                           AncestorAttribute: It is similar to the previous expression, but
-                                                                       the index is replaced by a location based on the values of key
-                                                                       attributes. An example is shown as follows:
+            Keywords: mobile application, front-end framework, information systems, Ionic 2, React Native
 
 
 
 
-                                                                           A type of expression is not always applicable on all platforms
-                                                                       and its versions. Each platform can present a different UI XML
-                                                                       structure and different attributes; this impacts on selecting elements
-                                                                       to test. Besides the CrossPlatform expression, each expression has
-                                                                       a platform-specific version. The single test engine, described in the
-                                                                       next section, identifies the platform and selects the appropriate
-                                                                       expression.
-
-                                                                       3.3 Single test engine
-                                                                       This step establishes a common mechanism for automated UI
-                                                                       testing of cross-platform apps in multiple configurations. The test
-                                                                       case represented by an ESG is the basis since each event contains
-                                                                       the UI element's data and its query expressions to select it. As the
-                                                                       aforementioned individual expressions might be limited in some
-                                                                       contexts and only applicable in some cases, we introduce two
-                                                                       locating strategies that combine the six expressions. The purpose of
-                                                                       this combination is that one expression may compensate for the
-Fig. 4 Algorithm 1: ExpressionsInOrder algorithm                       weaknesses of the other, providing an overall and more robust UI
-                                                                       element selection strategy.
-Table 2 Expression types and weights                                       ExpressionsInOrder: Expressions are sorted by their type and
-                                                                       executed sequentially. If the first expression fails, the next one is
-Expression type               Reliability               Weight
-                                                                       executed, and so on. The strategy aims to avoid the incomplete
-CrossPlatform                            high             0.25         execution of a test case due to an element not found error. We
-ElementType                              high             0.25         compare this strategy with conventional individual expressions in
-IdentifyAttributes                      medium            0.15         Section 5. The order we defined prioritises relative expressions,
-AncestorAttribute                       medium            0.25         starting with the CrossPlatform expression due to its suitability to
-AbsolutePath                             low              0.05         select UI elements in Android and iOS. Absolute expressions have
-AbsoluteIndex                            low              0.05
-                                                                       low priority since some studies indicate fragility in element
-                                                                       localisation [15, 16, 27]. The sequence order set up is:
-                                                                       CrossPlatform → ElementType → IdentifyAttributes →
-                                                                       AncestorAttributes → AncestorIndex → AbsolutePath.
-    ElementType: It is an expression to find an element based on the
-                                                                           Algorithm 1 (see Fig. 4) presents pseudocode for the proposed
-combination of its type and key attributes (Android: content-desc
-                                                                       strategy. ExecInOrder method (line 2) receives, as parameters, a set
-or text and iOS: label or value) or platform-specific identifier
-                                                                       of six XPath expressions, and locates an element in the XML UI
-attributes (Android: resouce-id or iOS: name). Rao and Pachunoori
-                                                                       structure of app using the expressions (lines 9–14). In the end, the
-[27] also suggest combining element type in XPath expressions.
-                                                                       found element (by one of the expressions) is executed according to
-We include the element type, prioritising the combination with the
-                                                                       the action indicated by the tester (line 18). When the element is not
-key attributes because they are more common than the identifier
-                                                                       found by any of the expressions, an exception is thrown to notify
-attributes. An example is shown as follows:
-                                                                       the test runner that the test case cannot proceed (lines 15 and 16).
-                                                                       The general idea of the algorithm was defined in this work.
-                                                                           ExpressionsMultiLocator: In this strategy, all expressions are
-                                                                       executed and the element is selected by voting criteria. These
-                                                                       criteria are proposed based on reliability strategies to determine
-                                                                       weights for each type of expression. This strategy was adapted
-    AncestorIndex: It is a platform-specific expression based on the   from Leotta et al. [16], which employed it to Web application
-index of the desired element contained within its ancestor element.    testing. As this strategy showed promising results for Web
-The index defines the exact position of the element, in this case,     applications [16], we adapted it for cross-platform apps and
-inside the ancestor container. This expression is hybrid since the     compared with the other strategies in Section 5. Table 2 lists the
-container is located by a relative query expression (based on key      weights for each expression. As follows, we discuss how the
-and identifier attributes, when available) and the inner element is    expressions’ weights were defined:
-located by the index (absolute positioning). This expression might
-help to find the element when attribute-based expressions fail due     • XPath expressions based on attribute values displayed in the UI
-to the dynamic changes; each run produces different attributes’          have a high weight, due to the constancy in maintaining their
-valuation. An example is shown as follows:                               values and independency of indexes and/or absolute paths.
-                                                                         Examples of these attributes are content-desc, text, label and
-                                                                         value. The expressions in this group are ElementType,
-                                                                         CrossPlatform, and AncestorAttributes.
-
-30                                                                                                 IET Softw., 2020, Vol. 14 Iss. 1, pp. 27-38
-                                                                                      © The Institution of Engineering and Technology 2019
-• XPath expressions based on identifier attribute values, such as
-  resource-id (Android) and name (iOS) are the next ones. In
-  some app development frameworks, the values of identifier
-  attributes change in different executions, thus the selection
-  reliability weakens. An example of this type of expression is
-  IdentifyAttributes.
-• XPath expressions based on absolute paths or indexes
-  (positioning) have the smallest weights. They have low
-  confidence due to their fragility during the software evolution
-  [15, 16, 27]. Examples of these expressions are AbsolutePath
-  and AncestorIndex.
-
-Algorithm 2 (see Fig. 5) presents pseudocode for the
-ExpressionsMultiLocator strategy. As in the previous combined
-strategy, the ExecMultiLocator method (line 2) receives, as
-parameters, a set of six XPath expressions. For each element found,
-its weight is extracted according to the current expression type. An
-element returned by different expressions has the weights
-accumulated. In the end, the element with the highest voting
-(weight sum) is used in the test case execution (lines 24 and 25).
-When the element is not found by any of the expressions, an
-exception is thrown to notify the test runner that the test case
-cannot proceed (lines 21 and 22).
-
-4   Tool implementation
-The approach has been implemented in a prototype tool called
-cross-platform app test script recorder (x-PATeSCO). The tool is
-based on Appium, an open source framework to automate tests in
-native, Web or hybrid apps. In addition, Appium is a cross-
-platform and makes it possible to automate tests for iOS and
-Android platforms, using a Selenium WebDriver API.
-    x-PATeSCO architecture is illustrated in Fig. 6. The tool uses
-Selenium WebDriver API (http://www.seleniumhq.org/projects/
-webdriver/) and an Appium server to connect to two devices, one
-Android and other iOS (CRef 1 and CRef 2), and send automation
-commands to the app's UI. The events specified by the tester are
-recorded and the tool automatically extracts and parses the UI's
-XML to build the test script using the appropriate XPath
-expressions (Section 3). The tool also generates a test project for
-Microsoft Visual Studio encoded in C# with support for the unit
-testing     framework       (https://msdn.microsoft.com/en-us/library/
-ms243147(vs.80).aspx). The project contains the classes that
-represent the automated test cases, modularised to help the testers
-in the test activities.
-    Fig. 7 shows a screenshot of x-PATeSCO; it offers
-functionalities to check the UI elements, the definition of its             Fig. 5 Algorithm 2: ExpressionsMultiLocator algorithm
-actions (click or text input), and test script generation. The first
-column provides fields to set up a remote connection with the
-Appium server and mobile devices. The second column shows a
-visual mechanism for elaborating the test case, providing pieces of
-information related to the app's UI. Column three brings the
-expressions that were automatically constructed by the tool based
-on the available data of the UI XML structure. Finally, column four
-highlights in an AUT UI screenshot, which is the UI element
-selected.
-    Fig. 8 illustrates an excerpt of a test script generated by the tool;
-in this case, the ElementType expression was selected by the tester.
-Lines 4–26 configure the connection with the Appium server,
-handling specific parameters for each platform. For each event, a           Fig. 6 Tool architecture
-method is created and invoked (lines 30–34); each method uses one
-of the eight strategies (proposed in Section 3) in accordance with          and might be used in cloud test environments, such as Amazon
-the tester's will. Such methods contain the appropriate XPath               Device Farm (https://aws.amazon.com/en/device-farm), Bitbar
-expressions to select an element (lines 42–49); in this case, the           (http://www.bitbar.com/testing),     and      TestObject     (https://
-ElementType strategy was adopted. Then, lines 53–55 execute the             testobject.com). These services offer a large number of real devices
-expression and fire the recorded action.                                    that can be connected and used to test cross-platform mobile apps.
-    We expect that the tool will help developers and testers to             Finally, the tool may be used by testers with low experience on
-implement more robust test scripts for cross-platform apps. The             cross-platform app testing. Tests are all recorded by means of its
-tool can fit in different testing processes. For instance, textual test     UI (see Fig. 7), so x-PATeSCO has a mild learning curve.
-cases for the cross-platform app may be provided and a tester/                  The x-PATeSCO tool is available as an open source project in
-developer needs to automate them in scripts. In this scenario, x-           [28]. The overall application of the tool and its locating strategies
-PATeSCO can support the recording and generation of test scripts.           are analysed in the next section.
-Other case is that the produced scripts are compatible with Appium
-
-IET Softw., 2020, Vol. 14 Iss. 1, pp. 27-38                                                                                                    31
-© The Institution of Engineering and Technology 2019
-Fig. 7 X-PATeSCO tool
-
-                                                                   behaviour with different apps, and to verify the results obtained
-                                                                   from different configurations. Therefore, we conducted an
-                                                                   experimental evaluation to compare the eight locating strategies:
-                                                                   six individual expressions (Section 3.2) and two combined
-                                                                   strategies (Section 3.3). The following research questions (RQs)
-                                                                   have been investigated:
-
-                                                                   • RQ1: How effective are the locating strategies to test cross-
-                                                                     platform mobile apps in multiple configurations?
-                                                                   • RQ2: How do the locating strategies perform with respect to
-                                                                     execution time?
-
-                                                                   RQ1 aims to compare the effectiveness of the locating strategies
-                                                                   through the analysis of how applicable are such expressions and if
-                                                                   tests based on them can be executed successfully in different
-                                                                   configurations. First, we measure their applicability to observe in
-                                                                   how many events each strategy can be used to select UI elements.
-                                                                   The executability was taken into account to see how successful (to
-                                                                   select an element at runtime) a strategy might be. Then, we analyse
-                                                                   executability at event and test case levels. As for RQ2, we aim to
-                                                                   analyse how the locating strategies might influence the execution
-                                                                   time of test cases. Then, we measure the CPU time in seconds of
-                                                                   events successfully executed using a given locating strategy.
-
-                                                                   5.1 Experimental objects and procedure
-                                                                   To answer the RQs we proceeded as follows. We selected a set of
-                                                                   cross-platform apps, two industrial apps, and seven samples apps to
-                                                                   run on Android and iOS platforms. Partner IT companies provided
-                                                                   the industrial apps projects containing the necessary assets to build
-                                                                   them in Android and iOS. The sample apps were from books on
-                                                                   developing hybrid and native cross-platform apps, as well as
-                                                                   GitHub repositories.
-                                                                       The apps used in the evaluation are characterised in Table 3,
-                                                                   showing the type of app, number of lines of code (LOC), main
-                                                                   programming language, cross-platform app type, and development
-                                                                   framework. Notice that we adopted a varied set of open source and
-                                                                   industrial cross-platform apps, with different sizes (LOC),
-                                                                   implemented with a diverse set of programming languages and
-                                                                   frameworks.
-                                                                       The projects of these apps were compiled for the Android and
-                                                                   iOS platforms and all the tests were run in the devices listed in
-Fig. 8 Test script generated by x-PATeSCO                          Table 4. The iOS projects pose restrictions to perform automated
-                                                                   tests, namely, the app needs to be signed with a developer account
-5    Evaluation                                                    provided by Apple and registered mobile devices are required. This
-                                                                   fact limited our experiments only for apps that we had the source
-To evaluate the proposed approach, it is necessary to understand   code available. Table 4 shows pieces of information about the six
-the performance of the locating strategies, to analyse their       actual devices (three with Android and three with iOS) in which
-32                                                                                             IET Softw., 2020, Vol. 14 Iss. 1, pp. 27-38
-                                                                                  © The Institution of Engineering and Technology 2019
-Table 3 Apps under test
-App name             Type                LOC       Programming language       Cross-platform app type          Development framework
-Fresh Food Finder      open source       13,824            Javascript                    hybrid                         Cordova
-Order App               industrial      71,565             Javascript                    hybrid                         Cordova
-MemesPlay              open source        5484             Javascript                    hybrid                         Cordova
-Agenda                 open source        1038             Javascript                    hybrid                         Cordova
-TodoListCordova        open source        9304             Javascript                    hybrid                         Cordova
-MovieApp               open source        2088             Javascript            native cross-platform                 ReactNative
-TodoList               open source        405              Javascript            native cross-platform                 ReactNative
-Tasky                  open source        654                 C#                 native cross-platform                  Xamarin
-Bargains                industrial      178,266               C#                 native cross-platform                  Xamarin
+     The need for mobile data access speeds                       can perform different tasks – website devel-
+across the company’s business processes.                          opment, mobile application development.
+Mobile coordination of reports or approval of                     Therefore, it appears to be pretty beneficial
+vacations is already a must have component                        for the both sides.
+of the work process in corporations. Every                             Among the leading frameworks, two of
+employee has a mobile device, so the compa-                       the most popular frameworks can be identi-
+ny can use these devices without investing in                     fied: Ionic 2 and React Native. Further, each
+them. A large variety of mobile devices must                      of them is considered separately, and their
+be considered when developing a corporate                         comparison is carried out. The comparison
+mobile application: it should work and have                       was performed only for two operating sys-
+the same appearance on all devices. In this ar-                   tems: iOS and Android.
+ticle, I will consider the creation of such cor-                       Ionic Framework is designed for creating
+porate mobile applications using various Java                     hybrid mobile applications. It includes a set of
+Script frameworks.                                                Java Script and CSS components created on
+     Corporate mobile apps are usually dis-                       top of Angular 2, SASS and Apache Cordova.
+tributed through the company’s internal app                       The history of this SDK begins in 2013, when
+stores. This makes it possible to control access                  the company Drifty Co. decided to create its
+to applications within the company, as well as                    own infrastructure for the purpose of writing
+forcefully install application updates. For the                   hybrid applications, which was supposed to be
+development and delivery of corporate mo-                         focused on performance and built using mod-
+bile applications, an appropriate infrastructure,                 ern web standards. Release Ionic 1 was held in
+known as the Mobile Enterprise Application                        May 2015. Version 2 was released in 2016. The
+Platform (MEAP), is required.                                     main difference between the second release
+     For MEAP, there was conducted an anal-                       and the first one is the transition from Angular
+ysis and a comparison of existing platforms                       1.x to Angular 2.x.
+and vendors by such leading companies as                               At its core, the Ionic Framework is an
+Gartner and Forrester (Gartner Magic Quad-                        add-on over the very popular Apache Cordova
+rant and Forrester Wave, respectively). All the                   framework, but with its powerful CLI (Com-
+leaders of these comparisons are considering                      mand Line Interface) and extensive documen-
+the possibility of creating native and hybrid                     tation. Following the principles of Apache
+mobile applications. Native applications are                      Cordova, applications built with the Ionic
+written using specific platform programming                       Framework are hybrid HTML applications.
+languages ​​(Swift or Objective-C for iOS, Java                   Such applications are run in a special shell on
+for Android). Hybrid mobile applications are                      devices (UIWebView for iOS and WebView for
+written in JavaScript using various libraries                     Android), which allows you to display HTML
+and frameworks.                                                   and execute JavaScript. Accordingly, when
+     Using JavaScript frameworks allows us                        working in the application, the user works as if
+to create new mobile applications using the                       in a web browser [1].
+existing front-end development team. For                               Apache Cordova is a kind of layer between
+the company, this means that the same team                        the user interface and device resources. Any
 
 
-Table 4    Configurations evaluated                                     5.2 Analysis of results and findings
-Device                     OS                     CPU         RAM
-                                                                        To answer the RQs proposed, this section presents and discusses
-Samsung Tab E 7″        Android 4.4.4     4-Core 1.3 GHz      1 GB      the results obtained. Table 5 summarises pieces of information
-Motorola G4 5.5″        Android 6.0.1     8-Core 1.4 GHz      2 GB      about the size of the tests generated by our tool and executed for
-Motorola G1 5″           Android 5.1      4-Core 1.2 GHz      1 GB      each application; it shows the number of test cases (#TCs), how
-iPhone 4 3.5″             iOS 7.1.2        2-Core 1 GHz      512 MB     many events were tested (#Ev.), LOC of the test projects generated
-iPad 2 9.7″                 iOS 9.3        2-Core 1 GHz      512 MB     by the X-PATeSCO tool (TP LOC), and average LOC per test case
-iPad 4 9.7″                iOS 10.2       2-Core 1.4 GHz      1 GB
-                                                                        (Avg LOC/TC). The test projects were then run in each of the six
-                                                                        configurations listed in Table 4, and the results were collected.
-                                                                            RQ1 – effectiveness: First, we observe the applicability of the
-                                                                        locating strategies. We define applicability ratio as the number of
-Table 5 Test data                                                       events in which a given strategy can be used to select a UI element
-App name                #TCs #Ev. TP LOC                Avg LOC/TC      divided by the total number of events. As discussed in Section 3,
-Fresh Food Finder          3     20        5600            233          some strategies might not be used in some contexts, e.g. the UI
-Order App                  3     16        5134            214          element has not some key attribute. As this information is useful
-MemesPlay                  3     12        3849            160          for the tester when the test case is being coded, we collected the
-Agenda                     3     18        5432            226          applicability ratio for each locating strategy.
-                                                                            Fig. 9 illustrates the applicability ratio when recording the test
-TodoListCordova            3     10        3649            152
-                                                                        cases in CRefs. Individual expressions based on absolute paths
-MovieApp                   3     10        3435            143
-                                                                        (AbsolutePath and AncestorIndex) obtained 100% of
-Todolist                   3     13        4136            172          applicability in all apps. This was expected once absolute
-Tasky                      3      9        3153            131          expressions map an exact path in the XML structure and do not
-Bargains                   2     10        3248            203          depend on often-optional parts (e.g. attributes). For other individual
-                                                                        strategies based on the attributes (namely, CrossPlatform,
-                                                                        AncestorAttributes, and IdentifyAttributes), their
-the apps were tested. The data on the devices’ processing power         applicability     ratio    was     inferior.     Among    them,    the
-provides a means to interpret the execution time analysed in the        IdentifyAttributes strategy presented the lowest applicability
-results. In addition, this data can also be used to compare with        ratio, being useful in 60.1% of the events. As the combined
-future replications of this study. The devices with Android 6.0.1       expressions       use      the      six      individual   expressions,
-and iOS 9.3 were selected as the reference configurations. We           ExpressionInOrder and ExpressionMultiLocator have an
-based this decision on the popularity of the platform versions [29,     applicability ratio of 100%.
-30].                                                                        While the applicability shows when a given strategy can be
-    We employed the x-PATeSCO tool to support the experimental          used, it is important to analyse how such a strategy is successful to
-evaluation. It connects to Appium which, in turn, connects to the       select a UI element at runtime. We define the executability ratio as
-mobile devices in order to execute the test scripts and extract data.   the strategy capability to select successfully a UI element when an
-Specific versions of Appium (according to the mobile OS) have           event is tested. After running the scripts in the six configurations,
-been installed and configured in two test servers for network access    the executability ratio of the strategies was calculated.
-by local computers. The resources used in the experiments are the           First, we look into the executability ratio for each event
-following:                                                              performed during the tests. Table 6 summarises the event
-                                                                        executability ratio showing the results for each configuration (first
-•   XCode 7.3 (for iOS 7);                                              row). For each configuration, it shows the number of successfully
-•   XCode 8.2 (for iOS 9.3 and 10.2);                                   executed events (SEE), the event executability ratio with respect to
-•   Android SDK r24.4.1;                                                the number of applicable events (%Ex.), and the event
-•   VisualStudio 2017;                                                  executability ratio concerning the total number of events (%To.).
-•   Appium 1.4.3 (Windows OS) and 1.5/1.6.3 (MAC OS);                   The last column (ALL) summarises all configurations, while the
-                                                                        last row shows, per configuration, the average event executability
-•   Selenium WebDriver for C# 2.53.0;
-                                                                        ratio.
-•   Appium WebDriver 1.5.0.1;                                               For each configuration, 118 events were executed, except for
-•   Windows 10 OS;                                                      configuration IOS7-1-2 with 85 events. The number of applicable
-•   MAC OS X Sierra.                                                    events was smaller since three apps (MovieApp, Bargains, and
-                                                                        TodoList) were not compatible with this iOS version.
-The nine apps were divided among four independent participants          Configurations with older versions than CRefs (namely, Android4-4
-with knowledge in software testing and mobile computing. We             and IOS7-1-2) present the lowest ratio. This is particularly evinced
-asked them to explore the apps and design two or three test cases       by absolute path strategies (AbsolutePath and AncestorIndex).
-for each one. Each test case, recorded in x-PATeSCO, has an event       We noticed that the UI's XML structures in these configurations are
-sequence representing common user interactions. The test projects       very different from the references.
-(generated by the tool) implement the eight strategies and collect
-the metrics used in this study.
+             EUROPEAN JOURNAL OF NATURAL HISTORY № 4, 2019
+                                   Technical sciences                                         77
 
-IET Softw., 2020, Vol. 14 Iss. 1, pp. 27-38                                                                                                33
-© The Institution of Engineering and Technology 2019
-Fig. 9 Applicability ratio in CRe f s
-
-Table 6 Event executability ratio
-Locating strategy                                                   And4-4         And5-1            And6-0-1Ref       IOS7-1-2       IOS9-3Ref       IOS10-2      ALL
-AbsolutePath                                            SEEa             0             76                 117              14             118            30        59.2
-                                                        %Ex.b          0.0           64.4                99.2             16.5           100.0          25.4       52.6
-                                                        %To.c          0.0           64.4                99.2             16.5           100.0          25.4       52.6
-AncestorIndex                                           SEE             31           108                 117                6             106            35        67.2
-                                                        %Ex.           26.3          91.5                99.2              7.1            89.8          29.7       59.7
-                                                        %To.           26.3          91.5                99.2              7.1            89.8          29.7       59.7
-ElementType                                             SEE             29            89                  95               14              93            64        64.0
-                                                        %Ex.           29.3          89.9                96.0             19.2            92.1          63.4       67.1
-                                                        %To.           24.6          75.4                80.5             16.5            78.8          54.2       56.9
-CrossPlatform                                           SEE             16            64                  80               36              95            73        60.7
-                                                        %Ex.           18.0          71.9                89.9             42.4            97.9          75.3       66.7
-                                                        %To.           13.6          54.2                67.8             42.4            80.5          61.9       53.9
-AncestorAttributes                                      SEE             17            81                  86               18              97            53        58.7
-                                                        %Ex.           17.2          81.8                86.9             24.7            96.0          52.5       61.5
-                                                        %To.           14.4          68.6                72.9             21.2            82.2          44.9       52.1
-IdentifyAttributes                                      SEE             12            47                  47               29              80            45        42.8
-                                                        %Ex.           19.0          74.6                74.6             46.0            93.0          52.3       61.3
-                                                        %To.           10.2          39.8                39.8             34.1            67.8          38.1       38.5
-ExpressionsInOrder                                      SEE             29            99                 107               39             118            82        79.0
-                                                        %Ex.           24.6          83.9                90.7             45.9           100.0          69.5       70.2
-                                                        %To.           24.6          83.9                90.7             45.9           100.0          69.5       70.2
-ExpressionsMultiLocator                                 SEE             29            99                 107               39             118            82        79.0
-                                                        %Ex.           24.6          83.9                90.7             45.9           100.0          69.5       70.2
-                                                        %To.           24.6          83.9                90.7             45.9           100.0          69.5       70.2
-%Ex. per configuration                                                 19.9          80.2                90.9             30.9           96.1           54.7        —
-a SEE stands for a number of successful events executed.
-b %Ex. stands for the event executability ratio with respect to the number of applicable events.
-c %To. stands for the event executability ratio with respect to the total number of events.
-Ref stands for the reference configurations.
+user interface widgets or MV* (Model-View)          hand allows you to create a native mobile ap-
+frameworks are not included. If you need to         plication using the fundamental UI building
+use UI widgets and / or MV* framework, then         blocks (like regular iOS and Android applica-
+you need to select and include them into the        tions that are written in the native language
+application yourself, as third-party resources.     Objective-C / Swift and Java, respectively).
+Ionic 2 is one of the frameworks that provides      The application on React Native uses certain
+UI widgets. The Angular 2+ framework pro-           templates defined by the platform itself.
+vides the MVC model for it.
+    Native phone features (for example, cam-                       Application code
+era, key store, GPS coordinates) are not acces-          For creating an application on Ionic 2, the
+sible from a web browser. Therefore, Apache         Angular 2 framework and Apache Cordova are
+Cordova plugins are used to work with them.         used. The application can be written in JavaS-
+In addition to the official plug-ins, there are a   cript or any other language that is broadcast in
+number of third-party open source plug-ins.         JavaScript. The most popular typed JS superset
+                                                    is TypeScript, introduced by Microsoft in 2012
+                 React Native
+                                                    and positioned as a web application develop-
+     React Native is a JavaScript framework de-     ment tool that extends JavaScript capabilities,
+veloped by Facebook for creating native mo-         and most of the examples in the Angular 2 doc-
+bile applications using JavaScript. The history     umentation are implemented in it. [5] Angular
+of React Native began in 2013 with Facebook’s       2 implements the dependency injection design
+internal hackathon project. React Native was        pattern (software design pattern), which con-
+first publicly mentioned at React.js Conf in        sists of 3 elements:
+January 2015, in March 2015 at F8 it was                 – Injector – provides API access for de-
+announced that React Native is available on         pendency injection;
+GitHub. The framework is built on top of the             – Provider – describes how to create a de-
+ReactJS library. React Native uses JavaScript       pendency instance, has a marker pointing to
+API on top of native components. During the         the factory function that creates the object;
+implementation of an application, developer              – Dependency – the type to which the cre-
+writes JavaScript code that works with the na-      ated object belongs.
+tive components of the operating system. That            In addition, Angular 2 uses a component
+is, React Native uses the same fundamental          approach that allows you to separate business
+standard UI blocks as regular iOS and Android       logic and things related to the UI. In addition,
+applications without using either a browser or      the separation is also used at the level of the
+WebView / UIWebView [2].                            project elements: HTML, JavaScript and CSS
+     An application on React Native uses a sep-     are kept in separate files.
+arate thread to execute javascript on the device.        In order to start writing an application on
+This thread interacts directly with native code.    React Native you need to get acquainted with
+It is important to mention that native compo-       ReactJS, JSX. It is also recommended to be
+nents (including user interface elements) are       familiar with Redux and EcmaScript 2015 to
+different for various operating systems. And,       speed up development, but knowledge of these
+accordingly, for each operating system it is        components is optional.
+necessary to create its own “bridges” between            You can also use Flow – this is a static code
+the JavaScript code and these components. A         analyzer and a set of syntactic structures to di-
+number of such components are provided by           rectly indicate the type of a variable. Flow can
+Facebook, and there are also many freely avail-     calculate the type of a variable, without making
+able components developed by the open source        changes to the code (unlike TypeScript), which
+community.                                          allows you to start using it now in any project.
+                                                    It is possible to specify types in the TypeScript
+           Ionic 2 vs React Native                  style independently.
+     Both Ionic 2 and React Native allow you             In the process of writing an application us-
+to create mobile applications. The fundamen-        ing React Native, you create components that
+tal difference between these frameworks lies in     are self-sufficient, each component is responsi-
+the type of mobile application that is created      ble for changes in its state. There are stateless
+using one or another framework. Ionic 2 allows      and stateful components. Components that do
+you to create a hybrid mobile application that      not have a state can pass properties down the
+renders in WebView / UIWebView. If you need         component structure (props are set by the par-
+to use the platform API, you will need to use       ent component and are fixed during the entire
+additional plugins. React Native on the other       life cycle of the component) [3].
 
 
+            EUROPEAN JOURNAL OF NATURAL HISTORY № 4, 2019
+   78                                Technical sciences
 
-    The specific characteristics of the two apps affected the results.                             collision did not occur and the combined strategies have a ratio of
-A ratio of 99.2% for AbsolutePath in Android6-0-1, and not                                         100%.
-100% as in IOS9-3, was observed. As Android6-0-1 is one of CRefs                                       As for individual expressions in all configurations,
-and AbsolutePath is always applicable, this result was                                             ElementType had the best results with 67.1% of executability
-unexpected. The issue happened in the MovieApp app: the content                                    ratio (for applicable events – %Ex.), followed by CrossPlatform
-of a certain screen is dynamic, changing the reference XML                                         (66.7%), AncestorAttributes (61.5%), IdentifyAttributes
-structure from which the test case was recorded. This broke the                                    (61.3%), and AncestorIndex (59.7%). AbsolutePath had the
-expression and no UI element was selected. Such a case also                                        worst event executability with only 52.6%. By comparing with the
-affected the executability of the combined strategies. Also, in                                    overall number of events (%To.), AncestorIndex was the best
-Android6-0-1, the ratio of 90.7% (below 100%) was observed for                                     (59.7%) since it is always applicable and IdentifyAttributes
-the combined strategies. Besides the issue with MovieApp, the                                      was the worst (38.5%) due to its lowest applicability ratio.
-ToDoList app presented a unique behaviour. One of its native                                       Concerning the combined strategies, ExpressionsInOrder and
-elements (a menu bar) has different structures for each platform. In                               ExpressionsMultiLocator were better than individual
-Android, the values of the menu's attributes collided with the                                     expressions (both with 70.2%). Their improvement is from 3.1%
-values of other elements within the same UI. This affects some                                     (w.r.t. ElementType) to 17.6% (w.r.t. AbsolutePath). By
-expressions as well as the combined strategies. In iOS, this                                       analysing the comparison with the overall number of events
-                                                                                                   (%To.), their executability is even better with improvements from
-
-34                                                                                                                            IET Softw., 2020, Vol. 14 Iss. 1, pp. 27-38
-                                                                                                                 © The Institution of Engineering and Technology 2019
-10.5%   (w.r.t. AncestorIndex)                            to       31.7%          (w.r.t.
-IdentifyAttributes).
-    We now look into the executability ratio from the test case
-perspective. This perspective is taken into account because
-practitioners may want to know whether the test case has been run
-completely or not using a specific strategy. A test case was
-considered applicable when all its events can be executed using a
-given strategy. Table 7 summarises the test case executability ratio;
-it shows the results for each configuration (first row). It is pretty
-similar to Table 6, the only modified row is the first for each
-locating strategy, namely successful test cases (STC). It measures                                    RQ2 – execution time: Besides the effectiveness, we shed light
-how many test cases were executed with success until the last                                     on the cost of each locating strategy by analysing the CPU
-event. For each configuration, 26 test cases are available, except                                execution time. To do so, we did not take into account events in
-for configuration IOS7-1-2 with 18 test cases.                                                    which the strategy failed to locate the UI element. Fig. 10
-    As for individual expressions in all configurations,                                          illustrates the average CPU time (in seconds) for SEE.
-IdentifyAttributes had the best results with 75% of                                                   Concerning individual expressions, IdentifyAttributes
-executability ratio (for applicable test cases – %Ex.), followed by                               was the fastest (13.2 s), followed by CrossPlatform (14.9 s),
-ElementType           (58.6%),       CrossPlatform          (58.1%),                              ElementType (16.4 s), and AncestorAttributes (16.4 s).
-AncestorIndex (54.1%), and AncestorAttributes (51%).                                              Absolute       path-based    strategies    (AncestorIndex      and
-AbsolutePath had the worst test case executability with only                                      AbsolutePath) were the slowest (24.4 and 25.1 s, respectively).
-49.3%. By comparing with the overall number of test cases (%To.),                                 As for combined strategies, ExpressionsInOrder and
-AncestorIndex was the best (54.1%) since it is always applicable                                  ExpressionsMultiLocator were slower than individual
-and IdentifyAttributes was the worst (14.2%) due to its                                           expressions with 26.9 and 166.7 s, respectively. While
-lowest applicability ratio. Concerning the combined strategies,                                   ExpressionsInOrder is close to the slowest individual
-ExpressionsInOrder and ExpressionsMultiLocator (both                                              expressions (around 24–25 s), the execution time of
-with 65.5%) were behind IdentifyAttributes (with 75%).                                            ExpressionsMultiLocator is approximately six times slower.
-However, they outperformed other individual expressions from                                      This was expected since its implementation requires the execution
-6.9% (w.r.t. ElementType) to 16.2% (w.r.t. AbsolutePath). By                                      of the six individual expressions plus the voting calculation.
-the comparison with the total number of test cases (%To.), their test
-case executability ratio is the best with improvements from 11.4%
-(w.r.t. AncestorIndex) to 51.3% (w.r.t. IdentifyAttributes).
+              Debugging process                         you can also use IDE for each of the plat-
+     Debugging applications in Ionic 2 is stand-        forms – Android Studio and Xcode, that al-
+ard for front-end developers. After running the         lows you to inspect in detail all the logs and
+application on the emulator / device, it is pos-        operation of the application (resource con-
+sible to debug applications using Safari web in-        sumption, speed, etc.) [4].
+spector (iOS only) or Chrome Developer tools.                                Styles
+These tools provide access to HTML, CSS,
+and JavaScript. During debug, you can quickly                Ionic 2 is written HTML5 code and uses
+edit styles, search for nodes in html, execute          the familiar front-end developer SASS. There
+and watch the result of JavaScript functions, as        are no restrictions on dimensional units, the
+well as network requests. In addition to run-           SASS preprocessor is used, you can also use
+ning on a device or an emulator, in the case of         flex markup. I often had to redefine Ionic 2
+Ionic 2, it is also possible to launch the applica-     variables. But sometimes this was not enough,
+tion directly in the browser (ionic serve). This        it was necessary to study the final html in the
+can speed up development, and with the help             browser, see what additional elements were
+of the ionic serve --lab command, it is easier to       generated and what styles they had in order to
+test applications on different screen diagonals         understand what and where to redefine or add.
+and platforms.                                          Also, a significant difference was in the dis-
+     Ionic 2 has the Hot Reload option. It allows       play of elements on different platforms. What
+you to make changes to the code and see these           looked good on iOS devices sometimes broke
+changes on the device / emulator without re-            styles on Android devices, it was necessary to
+building. However, it is not always possible to         find compromises.
+use it. Due to the fact that application is work-            In React Native, the creation of styles dif-
+ing in a web browser when using http requests,          fers from the usual for frontend developer.
+we encounter a CORS problem.                            Here css-detailed syntax is used, which is writ-
+     To debug applications on React Native,             ten as a js object. Then this object with “styles”
+it is also possible to use Chrome Developer             is transformed into understandable for the plat-
+Tools. If development is conducted on Apple             form instructions on the location and coloring
+devices, then it is possible to use the Safari          of elements.
+web inspector for an emulator or an iOS de-
+vice. To view the items, you can select the                            Application size
+“Show inspector” option in the Emulator / De-               For both frameworks, there are “empty”
+vice Developer Menu. At the same time, you              applications – these are application frame-
+can see the styles of elements, but changing            works with minimal code. Such applications
+them is possible only in the IDE (the method            are generated using the CLI:
+for quickly editing styles in developer tools               – Ionic 2: ionic start myApp blank --v2
+does not work here). But using LiveReload or                – React Native: react-native init Awesome-
+HotReload options within a few seconds, the             Project
+saved changes will be reflected in the emula-               Empty applications were collected in two
+tor / device. In case of global changes made,           modes: debug and release. The first mode is
+it is better to rebuild the project. Also, there        designed for debugging the application, the
+is the Network Tab in the Developer Menu,               second – for the direct delivery of ready-made
+which allows you to track HTTP requests.                applications to end users.
+Here you can see the type of request, method,               Applications on different frameworks have
+url, and more. It is kind of unusual if you got         different sizes on different platforms. Ionic 2
+used to debug in the browser. For debugging,            wins on Android, and React Native wins on iOS.
 
 
 
 
-Table 7 Test case executability ratio
-Locating strategy                                                    And4-4          And5-1          And6-0-1Ref     IOS7-1-2      IOS9-3Ref      IOS10-2     ALL
-AbsolutePath                                              STCa            0             15                   25           3             26            4       12.2
-                                                         %Ex.b           0.0           57.7                 96.2        16.7          100.0          15.4     49.3
-                                                         %To.c           0.0           57.7                 96.2        16.7          100.0          15.4     49.3
-AncestorIndex                                            STC              7             23                    25          0            20              5      13.3
-                                                         %Ex.           26.9           88.5                  96.2        0.0          76.9           19.2     54.1
-                                                         %To.           26.9           88.5                  96.2        0.0          76.9           19.2     54.1
-ElementType                                              STC              7             13                    13          3            13              9       9.7
-                                                         %Ex.           41.2           76.5                  76.5       16.7          86.7           60.0     58.6
-                                                         %To.           26.9           50.0                  50.0       16.7          50.0           34.6     39.2
-CrossPlatform                                            STC              3              7                     7          5            12              9       7.2
-                                                         %Ex.           30.0           70.0                  70.0       41.7          75.0           56.3     58.1
-                                                         %To.           11.5           26.9                  26.9       27.8          46.2           34.6     29.1
-AncestorAttributes                                       STC              4             11                    11          4            14              6       8.3
-                                                         %Ex.           23.5           64.7                  64.7       30.8          82.4           35.3     51.0
-                                                         %To.           15.4           42.3                  42.3       22.2          53.8           23.1     33.8
-IdentifyAttributes                                       STC              3              4                     4          3             4              3       3.5
-                                                         %Ex.           75.0          100.0                 100.0       75.0          66.7           50.0     75.0
-                                                         %To.           11.5           15.4                  15.4       16.7          15.4           11.5     14.2
-ExpressionsInOrder                                       STC              7             21                    22          6            26             15      16.2
-                                                         %Ex.           26.9           80.8                  84.6       33.3          100.0          57.7     65.5
-                                                         %To.           26.9           80.8                  84.6       33.3          100.0          57.7     65.5
-ExpressionsMultiLocator                                  STC              7             21                    22          6            26             15      16.2
-                                                         %Ex.           26.9           80.8                  84.6       33.3          100.0          57.7     65.5
-                                                         %To.           26.9           80.8                  84.6       33.3          100.0          57.7     65.5
-#TC per configuration                                                    26             26                    26         18            26             26       —
-a STC stands for a number of successful test cases executed.
-b %Ex. stands for the test cases executability ratio with respect to the number of applicable test cases.
-c %To. stands for the test case executability ratio with respect to the total number of test cases.
-Ref stands for the reference configurations.
+                             Application builds sizes in different modes
+                                Ionic 2                                      React Native
+                  Application               Application           Application            Application
+                in debug mode             in release mode       in debug mode          in release mode
+  IOS              18.3 Mb                    17.9 Mb               4.8 Mb                  4.6 Mb
+ Android           5.54 Mb                     4.0 Mb              32.38 Mb               16.35 Mb
 
 
 
-IET Softw., 2020, Vol. 14 Iss. 1, pp. 27-38                                                                                                                      35
-© The Institution of Engineering and Technology 2019
-Fig. 10 Average execution time of successful events
+             EUROPEAN JOURNAL OF NATURAL HISTORY № 4, 2019
+                                    Technical sciences                                                       79
 
-6    Discussion                                                          select the UI element the tester wants to verify or interact it with.
-                                                                         Then, any of the existing events may be applied to the selected UI
-This section discusses threats, limitations, and observations, as well   element. As the tool is built on top of a well-known UI testing
-as raises directions for future research.                                framework, the comprehensive set of events supported by Appium
-    Threats to validity: We herein analyse the threats to validity.      (http://appium.io/docs/en/about-appium/intro/)         may        be
-First, we adopted a limited number of configurations (devices).          incorporated in future versions.
-There exist a huge amount of devices in the market and each                  In the evaluation, we observed that the test cases were equal
-device may have several settings (e.g. OS version, language, and         (w.r.t. a sequence of UI events) in Android and iOS. While not
-connected accessories). As the cost of a comprehensive                   surprising since cross-platform apps have a unique code base, there
-investigation would be prohibitive, we opted by varying the OS           would be cases where UI components are different and event
-versions, mixing smartphones and tablets with diverse                    sequences may be shorter/longer in a certain platform. A future
-configurations. Yet, we recognise that only a small portion of           direction could be the identification of such cases in practice and
-possible configurations has been covered, reducing the                   assessing how our approach would fare.
-generalisation of obtained results.                                          Other perceived limitation is that the test scripts generated by
-    Another threat is the selection of the reference configurations.     x-PATeSCO are not sound if we consider the ample universe of
-As the locating strategies are designed based on them, other             available devices. In other words, the script will fail to select UI
-reference devices might produce different results. We believe that       elements in some specific devices. For these cases, the tester will
-such selection would be usually built on top of popularity; thus, we     need to repair the expression. Our goal was to minimise the
-based our decision on known statistics on users’ usage of platform       chances of a broken test script, as the approach improved the
-versions.                                                                executability ratio. We anticipate that with a well-defined and
-    As for the apps, we needed to access the source code as a            restrict set of devices, the approach and its tool could be tuned to
-restriction of the iOS platform; this limited our options. Moreover,     produce better results. In informal tests with some partner IT
-app developers may employ one of the several cross-platform              companies, we have received positive feedbacks and future
-development frameworks available in the market. So, it is difficult      versions of the tool could be used in practice. However, we
-to characterise a meaningful sample of cross-platform apps. To           recognise that further formal experiments in real-world settings are
-reduce this threat, we selected not only open source projects but        needed.
-also two industrial projects. Besides, we assured that apps                  The OS versions of Android and iOS used in this research, as
-developed with main development frameworks (namely, React                well as other versions currently available, share similar XML
-Native, Xamarin, and Apache Cordova) were selected.                      structures for the apps’ UIs. So, we believe that the approach and
-    To reduce the bias on the tests’ types and structure, four           its supporting tool are applicable in most of the current cross-
-independent participants with experience in mobile computing             platform apps; this is corroborated by the results in Section 5.
-designed the test cases. While the use of independent participants       However, there is no guarantee that the mobile OS vendor will
-helps to avoid a biased selection of test cases, one might argue on      maintain compatibility between its versions. During the
-their quality and representativeness. Using our previous experience      experiments, Android 4 showed meaningful differences with
-in software testing and analysing open source mobile UI tests [31],      respect to the reference version (Android 6). In addition, the latest
-these test cases were inspected. We conclude they have well-             version of iOS uses a new XML structure for organising UI
-defined test goals and represent common UI tests for mobile apps.        elements. We anticipate that general models of the XML structure
-    Most parts of the approach and data collection steps were            could be defined in future, as well as mappings between the
-executed automatically. As a consequence, some data could be             versions and OSs. Such artefacts could be integrated into our
-misleading since our implementation is subjected to faults. To           approach to making it more general.
-mitigate this threat, we manually tested the locating strategies in x-       Since the main purpose of this study is to produce robust test
-PATeSCO.
-                                                                         scripts for cross-platform apps, we focused our analysis on this
-    Together with the diversity of apps’ domain, size, and               aspect by measuring the effectiveness (with respect to executability
-development framework, we aimed to cover the main                        ratio) and performance (execution time). Therefore, fault detection
-characteristics that influence the automated testing of cross-           is out of the scope of this study. In general, cross-platform apps
-platform apps. Furthermore, we adopted a well-defined set of             pose the same challenges for bug detection as native apps [18],
-auditable quantitative metrics, described the sample selection, as       being more error-prone to compatibility bugs. A future direction is
-well as other methodological steps. We then have done our best to        to investigate if the test scripts produced by x-PATeSCO can be
-employ a sound method of evaluation, though most of the listed           amplified to detect compatibility bugs.
-threats might be overcome in the future with replications. Thus, we          While this study investigates six different types of individual
-made the tool and the experiment objects as an open source               XPath expressions, there exist several others in the literature,
-experimental package available in [28].                                  mainly for Web applications [16, 27, 32]. Practitioners and
-    Limitations and observations: x-PATeSCO only implements a            researchers can even come up with new kinds of expression and
-subset of all events (e.g. click and fill input field) that can be       further improvements may be achieved in future work. As for
-performed in mobile apps, so it is not possible to fully evaluate its    combined        strategies,   we     explored    two      approaches
-expressiveness. Nevertheless, the core of our approach is how to         ExpressionsInOrder and ExpressionsMultiLocator. We
-
-36                                                                                                   IET Softw., 2020, Vol. 14 Iss. 1, pp. 27-38
-                                                                                        © The Institution of Engineering and Technology 2019
-envision that two well-known techniques are promising in this               Boushehrinejadmoradi et al. [1] analysed the cross-platform
-context: evolutionary algorithms and machine learning. On the one       app development framework Xamarin. They developed a tool
-hand, a search-based approach may support the construction of           called X-Checker to uncover framework inconsistencies by
-more robust expressions by optimising the executability ratio of        comparing the performance of different builds (one for Android
-test scripts. On the other hand, the design of robust and general       and other for iOS) through differential testing. They generated
-expressions may be ‘learned’ from a well-constructed set of             22,645 test cases, which invoke 4758 methods implemented in 354
-examples.                                                               classes from 24 Xamarin DLLs. Overall, they found 47
-    There are several UI testing frameworks for mobile apps;            inconsistencies in the Xamarin code. The authors aimed to verify
-notable examples are Espresso and Robotium for native Android           the cross-platform framework, while we deal with the testing of the
-apps, XCTest for iOS, and Appium for cross-platform apps. With          apps developed by such frameworks.
-such frameworks, practitioners code and maintain scripts that               Li et al. [17] propose an approach and tool, called ATOM, to
-automate the execution of UI tests; this scenario seems to be the       automatically maintain app UI test scripts for regression testing.
-current state-of-the-practice in automated UI testing of mobile apps    ATOM uses event sequence models (ESMs) to describe the app's
-[31, 33]. We surmise that our approach would require a similar          behaviour, as well as a delta ESM to capture changes introduced by
-effort as coding native UI tests. x-PATeSCO automates most of the       a new version. The delta helps to understand the impact of changes
-script generation, so the tester will spend less time coding. On the    and to make adjustments in the test scripts. ATOM was applied to
-other hand, native tests are less-prone to have issues when selecting   maintain test scripts of 11 Android apps, using 22 different
-UI elements since they have access to internal structures of the        versions (two versions of each app). Maintenance of test scripts is
-native project. For cross-platform apps, the current state-of-the-      important for apps with constant updates. We plan to investigate
-practice would consist of one Appium script for each platform, as       how the scripts generated by our tool perform in such a scenario.
-well as the adoption of well-known expressions such as                      Fazzini et al. [14] have implemented a technique for (i)
-IdentifyAttributes and AbsolutePath. As the proposed                    recording the user interaction with the app, as well as the definition
-approach employs only one script, the effort spent to produce it        of assertion-based oracles; (ii) generating test cases based on the
-would be at most half of the current state-of-the-practice.             recorded interactions; and (iii) executing test cases on multiple
-Moreover, the obtained results gave evidence that                       devices, summarising the test results. The generated UI test cases
-ExpressionsInOrder is more effective than individual                    are based on the Espresso framework (https://google.github.io/
-expressions (e.g. IdentifyAttributes and AbsolutePath),                 android-testing-support-library). The authors implemented a tool
-imposing little overhead. This means that scripts generated by x-       called Barista, which was evaluated with 15 human subjects, 15
-PATeSCO would demand less maintenance effort when testing in            real-world Android apps, and seven (real) devices. Overall, the
-different devices. Yet, x-PATeSCO has previously discussed              average compatibility rate across all apps and devices was 99.2%.
-limitations we intend to overcome before adopting it in practice.       Barista focuses on Android apps and test scripts coded in a
-We plan to have more quantitative and formal comparisons by             platform-specific framework, while this study aims to automate the
-conducting controlled experiments. Another direction is to perform      testing of cross-platform apps running on different platforms
-case studies with partner IT companies in a real-world context of       (Android and iOS) and configurations.
-cross-platform app development.                                             Joorabchi et al. [13] assume that, ideally, a given cross-platform
-    Testing of cross-platform apps is essential if developers hope to   app must provide the same functionality and behaviour in the
-cover as many devices as the existing in the market. This motivates     various platforms. They introduced a tool, called CHECKCAMP,
-cloud services, such as Amazon Device Farm and BitBar, to offer         that detects inconsistencies between versions of the same native
-test features over hundreds of devices. The proposed approach           app programmed for different platforms, namely Android and iOS.
-aims to shed some light on how to automate such tests.                  During the execution, a parser dynamically intercepts calls to
-Unfortunately, each mobile platform has its own UI representation,      methods implemented and captures data from the UI after the
-which also varies between different versions of the same OS.            return of these methods. The tool then generates a template for
-Consequently, we also investigated and compared strategies to           both platforms and maps their nodes. In the end, these models are
-locate UI elements. The overall analysis suggests that                  compared to uncover inconsistencies. CHECKCAMP was
-ExpressionsInOrder should be used along with the approach,              evaluated with 14 pairs of apps (apps contained in the two
-though we recognise that there is still room for improvements.          platforms), detecting 32 valid inconsistencies. Their work and ours
-While the generalisation is not possible, we experimented our           are similar in the way both aim to test cross-platform apps.
-approach in apps developed using different frameworks and the           However, our approach focused on black-box test execution of
-results gave evidence that test scripts can be generated for other      cross-platform apps (developed from the same code base) in
-cross-platform apps. We hope that the approach, x-PATeSCO, and          multiple configurations, while CHECKCAMP requires code
-the results obtained help to pave the way for future advances.          instrumentation (white-box) and aims to detect inconsistencies, a
-                                                                        common problem with two or more code bases.
-                                                                            Automated test input generation (ATIG) tools have shown
-7   Related work                                                        promising results on fault detection and code coverage for Android
-This section describes the most relevant research in the area. Lee et   apps. Such tools automatically walk around the UIs of mobile apps
-al. [34] have developed a framework named HybriDroid for static         using different exploration strategies. ATIG is out of the scope of
-code analysis of hybrid apps in Android. HybriDroid analyses the        this study, though the results herein presented can foster the
-intercommunication between Java and Javascript (native and Web          development of similar tools for cross-platform apps. Currently, the
-environment), exploring Java classes extracted from the apps. The       tools are mostly for Android and do not aim to replicate the same
-authors evaluated 88 hybrid real-world apps from play store,            test in different configurations.
-detecting 24 faults in 14 apps. Different from our approach, Lee et
-al. focused on static analysis and not automated testing. Moreover,     8   Conclusion and future work
-only hybrid apps in Android were taken into account.
-    Wei et al. [35] conducted an empirical study to understand and      This study has introduced an approach to generate scripts to test
-characterise fragmentation issues in Android apps. The authors          cross-platform mobile apps in multiple configurations. To do so,
-investigated 191 compatibility issues collected from five open          we have also investigated XPath-based strategies to locate UI
-source Android apps to understand their root causes, symptoms,          elements. Six individual expressions have been researched and two
-and fixing strategies. The study led to a technique called FicFinder    combined          strategies       (ExpressionsInOrder        and
-to detect automatically compatibility issues. While compatibility       ExpressionsMultiLocator) were derived from them. We have
-bugs might be even a bigger problem for cross-platform apps, we         developed a tool, called x-PATeSCO, to implement the approach as
-concentrate on test execution. To detect such bugs, one might argue     well as the locating strategies. To evaluate the approach and
-that insights on automated tests in several configurations are          compare the locating strategies, we conducted an experimental
-mandatory.
-
-IET Softw., 2020, Vol. 14 Iss. 1, pp. 27-38                                                                                                37
-© The Institution of Engineering and Technology 2019
-study with nine cross-platform mobile apps tested on six different                        [12]   Nagappan, M., Shihab, E.: ‘Future trends in software engineering research for
-                                                                                                 Mobile apps’. 2016 IEEE 23rd Int. Conf. on Software Analysis, Evolution,
-configurations.                                                                                  and Reengineering (SANER), Suita, Japan, March 2016, pp. 21–32
-    The results have shown that four strategies (AbsolutePath,                            [13]   Joorabchi, M.E., Ali, M., Mesbah, A.: ‘Detecting inconsistencies in multi-
-AncestorIndex, ExpressionsInOrder, and ExpressionsMultiLocator)                                  platform mobile apps’. IEEE 26th Int. Symp. on Software Reliability
-are applicable to all events under test. Strategies based on key                                 Engineering (ISSRE 2015), Washington DC, USA, November 2015, pp. 450–
-                                                                                                 460
-attributes (AncestorAttributes, ElementType, CrossPlatform, and                           [14]   Fazzini, M., Freitas, E.N.D.A., Choudhary, S.R., et al.: ‘Barista: A technique
-IdentifyAttributes) are less applicable. When compared with                                      for recording, encoding, and running platform independent android tests’.
-known expressions employed in practice, they outperformed                                        2017 IEEE Int. Conf. on Software Testing, Verification and Validation
-IdentifyAttributes and AbsolutePath for event executability by                                   (ICST), Tokyo, Japan, March 2017, pp. 149–160
-                                                                                          [15]   Leotta, M., Stocco, A., Ricca, F., et al.: ‘Reducing web test cases aging by
-8.9% and 17.6%, respectively. For test case executability,                                       means of robust XPath locators’. Proc. – IEEE 25th Int. Symp. on Software
-IdentifyAttributes reached 75% though being less applicable for all                              Reliability Engineering Workshops, ISSREW 2014, Naples, Italy, November
-test cases and configurations are taken into account (14.2%). As for                             2014, pp. 449–454
-execution time, combined strategies were slower than individual                           [16]   Leotta, M., Stocco, A., Ricca, F., et al.: ‘Using multi-locators to increase the
-                                                                                                 robustness of web test cases’. 2015 IEEE 8th Int. Conf. on Software Testing,
-expressions; ExpressionsInOrder was around six times faster than                                 Verification and Validation (ICST), Graz, Austria, April 2015, pp. 1–10
-ExpressionsMultiLocator.                                                                  [17]   Li, X., Chang, N., Wang, Y., et al.: ‘ATOM: automatic maintenance of GUI
-    The results evinced that ExpressionsInOrder is the locating                                  test scripts for evolving Mobile applications’. Proc. 10th IEEE Int. Conf. on
-strategy recommended, being highly applicable and with                                           Software Testing, Verification and Validation, (ICST 2017), Tokyo, Japan,
-                                                                                                 March 2017, pp. 161–171
-reasonable executability ratio and time. Nevertheless, future                             [18]   Zein, S., Salleh, N., Grundy, J.: ‘A systematic mapping study of mobile
-advances might be achieved to improve the results herein provided.                               application testing techniques’, J. Syst. Softw., 2016, 117, (C), pp. 334–356.
-We plan to research different individual expressions and new                                     Available at https://doi.org/10.1016/j.jss.2016.03.065
-combined strategies to enhance the applicability and executability.                       [19]   IEEE: ‘IEEE standard glossary of software engineering terminology’, vol. 12,
-                                                                                                 (IEEE, 1990). Available at http://ieeexplore.ieee.org/xpls/absall.jsp?
-Another question to look into is how the tool performs with an                                   arnumber=159342
-extensive set of mobile devices accessible through cloud services                         [20]   W3C.: ‘Selectors level 3’. Available at https://www.w3.org/TR/2011/REC-
-such as Amazon Device Farm, BitBar, and others. Finally, the                                     css3-selectors-20110929/, accessed 17 April 2019
-maintenance of UI test scripts is also a topic worth investigating in                     [21]   W3C.: ‘XML path language (XPath) version 1.0’. Available at https://
-                                                                                                 www.w3.org/TR/xpath/, accessed 17 April 2019
-evolving cross-platform apps.                                                             [22]   Vilkomir, S., Marszalkowski, K., Perry, C., et al.: ‘Effectiveness of multi-
-                                                                                                 device testing Mobile applications’. 2nd Int. Conf. on Mobile Software
-9      Acknowledgments                                                                           Engineering and Systems (MOBILESoft), Florence, Italy, May 2015, pp. 44–
-                                                                                                 47
-The authors thank the partner IT companies that provided the                              [23]   Vilkomir, S., Amstutz, B.: ‘Using combinatorial approaches for testing mobile
-                                                                                                 applications’. 2014 IEEE Seventh Int. Conf. on Software Testing, Verification
-industrial apps used in this study. Special thanks to the independent                            and Validation Workshops, Cleveland, OH, USA, 31 March – 4 April 2014,
-participants who helped to elaborate on the test cases adopted in                                pp. 78–83. Available at http://ieeexplore.ieee.org/lpdocs/epic03/wrapper.htm?
-the experimental evaluation. The authors are also grateful to the                                arnumber=6825641
-anonymous reviewers for their useful comments and suggestions.                            [24]   Belli, F., Budnik, C.J., White, L.: ‘Event-based modelling, analysis and
-                                                                                                 testing of user interactions: approach and case study’, Softw. Test Verif.
-A.T.E. is partially financially supported by CNPq/Brazil (grant no.                              Reliab., 2006, 16, (1), pp. 3–32. Available at http://dx.doi.org/10.1002/
-420363/2018-1).                                                                                  stvr.v16:1
-                                                                                          [25]   Leotta, M., Clerissi, D., Ricca, F., et al.: ‘Comparing the maintainability of
-                                                                                                 selenium webdriver test suites employing different locators: a case study’.
-10     References                                                                                Proc. 2013 Int. Workshop on Joining AcadeMiA and Industry Contributions
-[1]     Boushehrinejadmoradi, N., Ganapathy, V., Nagarakatte, S., et al.: ‘Testing               to Testing Automation, Jamaica, Lugano, Switzerland, July 2013, pp. 53–58
-        cross-platform mobile app development frameworks’. 2015 30th IEEE/ACM             [26]   Leotta, M., Clerissi, D., Ricca, F., et al.: ‘Repairing selenium test cases: an
-        Int. Conf. on Automated Software Engineering (ASE), Lincoln, NE, USA,                    industrial case study about web page element localization’. 2013 IEEE Sixth
-        November 2015, pp. 441–451                                                               Int. Conf. on Software Testing, Verification and Validation, Luxembourg,
-[2]     IDC.: ‘Smartphone OS market share, 2017 Q1’. 2017. Available at https://                 March 2013, pp. 487–488
-        www.idc.com/promo/smartphone-market-share/os, accessed 17 April 2019              [27]   Rao, G., Pachunoori, A.: ‘Optimized identification techniques using XPath’.
-[3]     Gartner.: ‘Gartner says worldwide sales of smartphones grew 9 percent in first           MSU-CSE-00-2, IBM Developerworks, 2013
-        quarter of 2017’. 2017. Available at https://www.gartner.com/newsroom/id/         [28]   Menegassi, A.A., Endo, A.T.: ‘x-PATeSCO and experimental package’.
-        3725117, accessed 17 April 2019                                                          Available at https://github.com/andremenegassi/x-PATeSCO, accessed 17
-[4]     Statista.: ‘Number of apps available in leading app stores as of march 2017’.            April 2019
-        Available     at     http://www.statista.com/statistics/276623/number-of-apps-    [29]   Statista.: ‘Android version market share distribution among smartphone
-        available-in-leading-app-stores/, accessed 17 April 2019                                 owners as of September 2017’. Available at https://www.statista.com/
-[5]     IBM.: ‘Native, web or hybrid mobile-app development’. Somers, NY.                        statistics/271774/share-of-android-platforms-on-mobile-devices-with-
-        Available      at      ftp://public.dhe.ibm.com/software/pdf/mobile-enterprise/          android-os/, accessed 17 April 2019
-        WSW14182USEN.pdf, accessed 17 April 2019                                          [30]   Statista.: ‘Share of Apple devices by iOS version worldwide from 2016 to
-[6]     W3C.: ‘Web design and applications’. Available at https://www.w3.org/                    2017’. Available at https://www.statista.com/statistics/565270/apple-devices-
-        standards/webdesign/, accessed 17 April 2019                                             ios-version-share-worldwide/, accessed 17 April 2019
-[7]     Xanthopoulos, S., Xinogalos, S.: ‘A comparative analysis of cross-platform        [31]   Silva, D.B., Eler, M.M., Durelli, V.H.S., et al.: ‘Characterizing mobile apps
-        development approaches for mobile applications’. ACM Proc. 6th Balkan                    from a source and test code viewpoint’, Inf. Softw. Technol., 2018, 101, pp.
-        Conf. in Informatics, BCI'13, New York, NY, USA, 2013, pp. 213–220.                      32–50.      Available     at   http://www.sciencedirect.com/science/article/pii/
-        Available at http://doi.acm.org/10.1145/2490257.2490292                                  S0950584918300788
-[8]     Willocx, M., Vossaert, J., Naessens, V.: ‘Comparing performance parameters        [32]   Leotta, M., Stocco, A., Ricca, F., et al.: ‘Robula + : an algorithm for
-        of mobile app development strategies’. 3rd Int. Conf. on Mobile Software                 generating robust XPath locators for web testing’, J. Softw.: Evol. Process,
-        Engineering and Systems (MOBILESoft), 2016, pp. 38–47. Available at                      2016,       28,     (3),     pp.      177–204.     Available      at     https://
-        http://dl.acm.org/citation.cfm?doid=2897073.2897092                                      onlinelibrary.wiley.com/doi/abs/10.1002/smr.1771
-[9]     Willocx, M., Vossaert, J., Naessens, V.: ‘A quantitative assessment of            [33]   Cruz, L., Abreu, R., Lo, D.: ‘To the attention of mobile software developers:
-        performance in mobile app development tools’. 2015 IEEE Int. Conf. on                    guess what, test your app!’, Empir. Softw. Eng., 2019, 24, pp. 2438–2468.
-        Mobile Services (MS), New York, NY, USA, , 27 June – 2 July 2015, pp.                    Available at https://doi.org/10.1007/s10664-019-09701-0
-        454–461                                                                           [34]   Lee, S., Dolby, J., Ryu, S.: ‘Hybridroid: analysis framework for android
-[10]    Gronli, T.M., Ghinea, G.: ‘Meeting quality standards for mobile application              hybrid applications’. 31st IEEE/ACM Int. Conf. on Automated Software
-        development in businesses: a framework for cross-platform testing’. IEEE                 Engineering (ASE 2016), Singapore, September 2016, pp. 250–261
-        49th Hawaii Int. Conf. on System Sciences (HICSS 2016), Koloa, HI, USA,           [35]   Wei, L., Liu, Y., Cheung, S.C.: ‘Taming android fragmentation: characterizing
-        January 2016, pp. 5711–5720                                                              and detecting compatibility issues for android apps’. 31st IEEE/ACM Int.
-[11]    Joorabchi, M.E., Mesbah, A., Kruchten, P.: ‘Real challenges in Mobile app                Conf. on Automated Software Engineering ASE ‘16, Singapore, September
-        development’. IEEE Int. Symp. on Empirical Software Engineering and                      2016, pp. 226–237
-        Measurement (ESEM 2013), Baltimore, MD, USA, October 2013, pp. 15–24
+ Popularity and activity of the community            frameworks described on the official websites,
+            of the frameworks                        third-party Starter Kit were not considered by us)
+                                                         – “Write once, run anywhere” – the written
+     When comparing the popularity of frame-         application works on all popular platforms, it
+works, you need to consider that React Native is     gives cross-platform with minor code changes
+a younger technology. Initially, React Native had        Disadvantages of Ionic 2:
+support for iOS only. Android support in React           – stylization – changing the default styles
+Native appeared only in August 2015, and the         to bring them in accordance with the layout
+Ionic Framework at that time was developing for      significantly increases the time spent on creat-
+more than two years (although it had version 1.0)    ing and testing applications on different plat-
+and had the support of all popular platforms.        forms and devices
+     Popularity and activity were compared by            – Browser use – longer application load and
+the two most popular resources: stackoverflow        poor responsiveness when the CPU is loaded
+and github.                                          due to using the browser shell to simulate the
+     For the Ionic Framework on stackover-           behavior of the components of each platform
+flow, there are about 60,000 results for Ionic           – native functions – when a native event
+and Ionic 2. When considering statistics on the      occurs, the main thread is blocked and control
+Github repository, it is important to note that in   is passed to the JavaScript code, waiting for its
+mid-2016, the Ionic 2 code migrated to the Ion-      instructions, which can lead to unpredictable
+ic repository. In the Ionic repository, more than    operation of native functions
+200 participants made about 6000 commits in              Benefits of React Native:
+15 branches with 88 releases. About 700 open             – standard native UI blocks – the use of the
+questions and ~ 9000 closed questions are in         fundamental standard UI blocks, like regular
+the repository of the project.                       iOS and Android applications, familiar to the
+     For React Native on stackoverflow, there        user from other native applications, facilitates
+are about 25,000 results for react-native. Sta-      user interaction with the application
+tistics on the Github React Native repository            – non-blocking javascript execution – javas-
+show that this framework is more active than         cript runs in a separate background thread, inter-
+Ionic 2: over 1200 participants made about           acting with the main thread asynchronously
+10,000 commits in 60 branches with 160 re-               – styling – the application looks equally
+leases. The project repository contains ~ 1100       good on different platforms and devices
+open questions and ~ 7000 closed.                        – load on the CPU – the tests carried out
+                                                     by the application using the CPU and memory
+                  Conclusions                        show better results compared to the Ionic 2.
+     Corporate applications for mobile devices,          Disadvantages of React Native:
+created using JavaScript, have occupied their            – the need to work with native code plat-
+niche. The speed of such applications is suf-        form – it may be necessary to understand the
+ficient compared to applications written in na-      components written in ObjectiveC / Swift or Java
+tive platform languages. In general, one cannot          – complexity of the start (without experi-
+say that some kind of framework is better, and       ence with ReactJS) – additional time is needed
+some kind is worse. They are just different. The     for getting to know React, JSX and a different
+choice depends on the tasks, the ultimate goal       writing approach (components as separate in-
+and many other factors. In general, we can rec-      terface units that are responsible for their own
+ommend using Ionic 2 for rapid development           state and behavior).
+of prototypes of mobile applications, and React                               References
+Native – for the full development of ready-made
+                                                           1. Official Ionic web site [digital source] URL: https://ion-
+solutions. Below is a list of the advantages and     icframework.com/docs/v1/guide/preface.html (date of treatment
+disadvantages of each framework, based on our        07.08.2019).
+impressions of using Ionic 2 and React Native.             2. React native handbook [digital source] URL: https://
+                                                     medium.freecodecamp.org/the-react-handbook-b71c27b0a795
+     Advantages of Ionic 2:                          (date of treatment 07.08.2019).
+     – a well-known set of tools – for a frontend          3. When to Choose React Native for Building a Mobile
+                                                     App and When to Avoid It [digital source] URL: https://rubyga-
+developer, the set of technologies used is fa-       rage.org/blog/react-native-for-mobile-app-development (date of
+miliar, it significantly reduces the time to com-    treatment 07.08.2019).
+plete the task                                             4. React Native – Is it Really the Future of Mobile App
+                                                     Development? [digital source] URL: https://hackernoon.com/
+     – quick start – using the application tem-      react-native-is-it-really-the-future-of-mobile-app-development-
+plates provided to us by Ionic, you can create a     31cb2c531747 (date of treatment 07.08.2019).
+                                                           5. App Development: Ionic or NativeScript? [digital
+prototype in a short time to show to the customer    source] URL: https://codeburst.io/app-development-ionic-or-
+(we are talking only about the methods of the        nativescript-40b118bd8e51 (date of treatment 07.08.2019).
 
 
 
-
-38                                                                                                                      IET Softw., 2020, Vol. 14 Iss. 1, pp. 27-38
-                                                                                                           © The Institution of Engineering and Technology 2019
+            EUROPEAN JOURNAL OF NATURAL HISTORY № 4, 2019
 
